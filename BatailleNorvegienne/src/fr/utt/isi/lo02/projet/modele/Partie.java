@@ -54,6 +54,7 @@ public class Partie {  // Cette class sera p-e dans le controleur
 		JeuDeCarte jdc = new JeuDeCarte();
 		jdc.battreLeJeu();
 		jdc.toString();
+		// poney party !!!
 		
 		
 	}
