@@ -20,18 +20,7 @@ public class Partie {  // Cette class sera p-e dans le controleur
 		
 	}
 	
-	public int choisirNbJoueur(){
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Veuillez choisir un nombre de joueurs entre 1 et 10 :");
-		int nbJoueur = sc.nextInt();
-		System.out.println("Vous avez saisi : " + nbJoueur);
-		
-		if(nbJoueur > 10){
-			System.out.println("Entre 1 et 10, c'est pas compliqué non ? ");
-			choisirNbJoueur(); 
-		}
-		return nbJoueur;
-	}
+	
 	
 	public void incrementerTour(){
 		
@@ -48,13 +37,11 @@ public class Partie {  // Cette class sera p-e dans le controleur
 	
 	public static void main(String[] args) {
 		Partie p1 = new Partie();
-		p1.choisirNbJoueur();
-		fr.utt.isi.lo02.projet.modele.Carte c1 = new Carte(0,  COULEUR.Trefle, FORCE.roi);
-		JeuDeCarte jdc = new JeuDeCarte();
-	//	jdc.battreLeJeu();
-		System.out.println(jdc.toString());
+		Joueur.listJoueur();
 		
-		
-		
+//		fr.utt.isi.lo02.projet.modele.Carte c1 = new Carte(0,  COULEUR.Trefle, FORCE.roi);
+//		JeuDeCarte jdc = new JeuDeCarte();
+//		jdc.battreLeJeu();
+//		System.out.println(jdc.toString());		
 	}
 }

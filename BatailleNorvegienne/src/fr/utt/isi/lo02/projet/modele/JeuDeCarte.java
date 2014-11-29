@@ -2,6 +2,8 @@ package fr.utt.isi.lo02.projet.modele;
 
 import java.util.LinkedList;
 import java.util.Collections;
+import java.util.List;
+import java.util.ListIterator;
 
 import fr.utt.isi.lo02.projet.modele.Carte.COULEUR;
 import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
@@ -26,12 +28,13 @@ public class JeuDeCarte {
 		Collections.shuffle(jeuDeCarte);
 	}
 
-	public void distribuerCarte() {
-
-	}
-
-	public void echangerLesCartes(int idJoueur) {
-
+	public void distribuerCarte(JeuDeCarte jdc) {
+		/* ListIterator li = ((List<Carte>) jdc).listIterator();
+		 
+	      while(li.hasNext())
+	        System.out.println(li.next());
+		
+		*/
 	}
 
 	@Override

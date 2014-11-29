@@ -18,7 +18,6 @@ public class Carte {
 	public Carte(int idCarte,  COULEUR couleurCarte,
 			FORCE force) {
 		this.idCarte = idCarte;
-	
 		this.couleurCarte = couleurCarte;
 		this.force = force;
 		

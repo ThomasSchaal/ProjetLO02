@@ -8,4 +8,20 @@ public class CarteCachee extends ZoneDeJeu {
 		super(nbCarte, cartesCachee);
 	}
 
+	public int getNbCarte() {
+		return nbCarte;
+	}
+
+	public void setNbCarte(int nbCarte) {
+		this.nbCarte = nbCarte;
+	}
+
+	public JeuDeCarte getCartesCachee() {
+		return cartesCachee;
+	}
+
+	public void setCartesCachee(JeuDeCarte cartesCachee) {
+		this.cartesCachee = cartesCachee;
+	}
+
 }
