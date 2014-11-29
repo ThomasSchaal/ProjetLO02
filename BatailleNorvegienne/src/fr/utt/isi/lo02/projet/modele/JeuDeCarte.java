@@ -29,12 +29,11 @@ public class JeuDeCarte {
 	}
 
 	public void distribuerCarte(JeuDeCarte jdc) {
-		/* ListIterator li = ((List<Carte>) jdc).listIterator();
-		 
-	      while(li.hasNext())
-	        System.out.println(li.next());
-		
-		*/
+		/*ListIterator li = ((List<Carte>) jdc).listIterator();
+		Joueur[] tabJoueur = Joueur.listJoueur();
+		while (li.hasNext())
+			System.out.println(li.next());*/
+
 	}
 
 	@Override
