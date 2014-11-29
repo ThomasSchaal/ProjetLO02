@@ -1,7 +1,6 @@
 package fr.utt.isi.lo02.projet.modele;
 
 import java.util.Scanner;
-
 import fr.utt.isi.lo02.projet.modele.Carte.COULEUR;
 import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
 
@@ -48,13 +47,13 @@ public class Partie {  // Cette class sera p-e dans le controleur
 	
 	
 	public static void main(String[] args) {
-		/*Partie p1 = new Partie();
+		Partie p1 = new Partie();
 		p1.choisirNbJoueur();
-		fr.utt.isi.lo02.projet.modele.Carte c1 = new Carte(0, "roiDeTrefle", COULEUR.Trefle, FORCE.roi, 1);*/
+		fr.utt.isi.lo02.projet.modele.Carte c1 = new Carte(0,  COULEUR.Trefle, FORCE.roi);
 		JeuDeCarte jdc = new JeuDeCarte();
-		jdc.battreLeJeu();
-		jdc.toString();
-		// poney party !!!
+	//	jdc.battreLeJeu();
+		System.out.println(jdc.toString());
+		
 		
 		
 	}
