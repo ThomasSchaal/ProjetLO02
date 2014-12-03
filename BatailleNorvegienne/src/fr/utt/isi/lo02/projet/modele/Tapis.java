@@ -12,7 +12,23 @@ public class Tapis extends ZoneDeJeu {
 		 
 	 }
 	 
-	 public void becher(){
+	 public int getNbCarte() {
+		return nbCarte;
+	}
+
+	public void setNbCarte(int nbCarte) {
+		this.nbCarte = nbCarte;
+	}
+
+	public JeuDeCarte getCartesTapis() {
+		return cartesTapis;
+	}
+
+	public void setCartesTapis(JeuDeCarte cartesTapis) {
+		this.cartesTapis = cartesTapis;
+	}
+
+	public void becher(){
 		 
 	 }
 }

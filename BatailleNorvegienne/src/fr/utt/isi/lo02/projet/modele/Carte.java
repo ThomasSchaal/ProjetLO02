@@ -50,7 +50,7 @@ public class Carte {
 
 	@Override
 	public String toString() {
-		return "Carte [idCarte=" + idCarte  + ", couleurCarte="
+		return "\nCarte [idCarte=" + idCarte  + ", couleurCarte="
 				+ couleurCarte + ", force=" + force + "]";
 	}
 

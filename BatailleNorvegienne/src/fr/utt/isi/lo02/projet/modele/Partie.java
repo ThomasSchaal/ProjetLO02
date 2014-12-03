@@ -3,37 +3,55 @@ package fr.utt.isi.lo02.projet.modele;
 import fr.utt.isi.lo02.projet.modele.Carte.COULEUR;
 import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
 
-public class Partie {  // Cette class sera p-e dans le controleur
+public class Partie { // Cette class sera p-e dans le controleur
 
 	private Joueur[] listJoueur;
-	//private int joueurActif; 
+	// private int joueurActif;
 	private int nbTour;
-	
-	public Partie(Joueur[] listJoueur){//, int joueurActif, int nbTour){
-		this.listJoueur=listJoueur;
-		//this.joueurActif=joueurActif;
-		//this.nbTour=nbTour;
+
+	public Partie(Joueur[] listJoueur) {// , int joueurActif, int nbTour){
+		this.listJoueur = listJoueur;
+		// this.joueurActif=joueurActif;
+		// this.nbTour=nbTour;
 	}
-		
-	public void incrementerTour(){
-		nbTour++; 
+
+	public void incrementerTour() {
+		nbTour++;
 	}
-	
-	public void incrementerJoueurActif(){
-		
+
+	public void incrementerJoueurActif() {
+
 	}
-	
-	public void obtenirNbJoueur(){
-	
+
+	public int getNbJoueur() {
+		return listJoueur.length;
 	}
-	
-	
+
+	public Joueur[] getListJoueur() {
+		return listJoueur;
+	}
+
+	public void setListJoueur(Joueur[] listJoueur) {
+		this.listJoueur = listJoueur;
+	}
+
+	public int getNbTour() {
+		return nbTour;
+	}
+
+	public void setNbTour(int nbTour) {
+		this.nbTour = nbTour;
+	}
+
 	public static void main(String[] args) {
-		
+
 		Partie p1 = new Partie(Joueur.listJoueur());
-//		fr.utt.isi.lo02.projet.modele.Carte c1 = new Carte(0,  COULEUR.Trefle, FORCE.roi);
-//		JeuDeCarte jdc = new JeuDeCarte();
-//		jdc.battreLeJeu();
-//		System.out.println(jdc.toString());		
+		// fr.utt.isi.lo02.projet.modele.Carte c1 = new Carte(0, COULEUR.Trefle, FORCE.roi);
+		JeuDeCarte jdc = new JeuDeCarte();
+		// jdc.battreLeJeu();
+		jdc.distribuerCarte();
+		//System.out.println(jdc.toString());
+		System.out.println(p1.getListJoueur());
+
 	}
 }
