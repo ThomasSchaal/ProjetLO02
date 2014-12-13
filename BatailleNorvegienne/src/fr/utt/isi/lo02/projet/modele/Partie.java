@@ -47,7 +47,7 @@ public class Partie { // Cette class sera p-e dans le controleur
 	}
 
 	public void distribuerCarte() {
-2		Joueur[] tabJoueur = Partie.this.getListJoueur();
+		Joueur[] tabJoueur = Partie.this.getListJoueur();
 		JeuDeCarte jdc = new JeuDeCarte();
 		Pioche pio ;
 //		jdc.battreLeJeu();
