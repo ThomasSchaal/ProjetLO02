@@ -6,8 +6,8 @@ public class Virtuel extends Joueur {
 	//private String nomJoueur; 
 	private String difficulte; 
 	
-	public Virtuel(int idJoueur, String nomJoueur, String difficulte){
-		super(idJoueur);
+	public Virtuel(int idJoueur,Main main, CarteCachee carteCachee, CarteVisible carteVisible , String difficulte){
+		super(idJoueur, main, carteCachee, carteVisible);
 		this.difficulte=difficulte;
 	}
 

@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.projet.modele;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Joueur {
@@ -10,21 +11,22 @@ public class Joueur {
 	private CarteVisible carteVisible;
 
 	// TODO rajouter le nom au joueur
-	public Joueur(int idJoueur) {
+	public Joueur(int idJoueur, Main m, CarteCachee cc, CarteVisible cv) {
 		this.idJoueur = idJoueur;
-		// this.nomJoueur=nomJoueur;
-	}
-
-	public Joueur(Main m, CarteCachee cc, CarteVisible cv) {
 		this.main = m;
 		this.carteCachee = cc;
-		this.carteVisible = cv;
+		this.carteVisible = cv;	
 	}
 
+
+
+	/**
+	 * Demande un nombre de joueur 
+	 * @return nbJoueur
+	 */
 	public static int choisirNbJoueur() {
 		Scanner sc = new Scanner(System.in);
-		System.out
-				.println("Veuillez choisir un nombre de joueurs entre 1 et 10 :");
+		System.out.println("Veuillez choisir un nombre de joueurs entre 1 et 10 :");
 		int nbJoueur = sc.nextInt();
 		System.out.println("Vous avez saisi : " + nbJoueur);
 
@@ -35,21 +37,74 @@ public class Joueur {
 		return nbJoueur;
 	}
 
+	/**
+	 * Créer un tableau de Joueur en fonction du nombre de joueur
+	 * @return tabJoueur un tableau de joueur
+	 */
 	public static Joueur[] listJoueur() {
 		int nbJoueur = choisirNbJoueur();
 		Joueur[] tabJoueur = new Joueur[nbJoueur];
 		for (int i = 0; i < nbJoueur; i++) {
-			Joueur j = new Joueur(i);
+			JeuDeCarte jdcMain = new JeuDeCarte(null); 
+			JeuDeCarte jdcCC = new JeuDeCarte(null); 
+			JeuDeCarte jdcCV = new JeuDeCarte(null); 
+			Main m =new Main(0, jdcMain);
+			CarteCachee cc = new CarteCachee(0, jdcCC);
+			CarteVisible cv = new CarteVisible(0, jdcCV);
+			Joueur j = new Joueur(i, m, cc, cv);
 			tabJoueur[i] = j;
-			System.out.println(tabJoueur[i]);
 		}
 		return tabJoueur;
 	}
 
-	// TODO créer méthode pour mettre les cartes dans la main/carteCachee/carteVisible en reception de la distribution
-	
 	public void echangerLesCartes(Carte carte1, Carte carte2) {
 
 	}
 
+	public int getIdJoueur() {
+		return idJoueur;
+	}
+
+	public void setIdJoueur(int idJoueur) {
+		this.idJoueur = idJoueur;
+	}
+
+	public String getNomJoueur() {
+		return nomJoueur;
+	}
+
+	public void setNomJoueur(String nomJoueur) {
+		this.nomJoueur = nomJoueur;
+	}
+
+	public Main getMain() {
+		return main;
+	}
+
+	public void setMain(Main main) {
+		this.main = main;
+	}
+
+	public CarteCachee getCarteCachee() {
+		return carteCachee;
+	}
+
+	public void setCarteCachee(CarteCachee carteCachee) {
+		this.carteCachee = carteCachee;
+	}
+
+	public CarteVisible getCarteVisible() {
+		return carteVisible;
+	}
+
+	public void setCarteVisible(CarteVisible carteVisible) {
+		this.carteVisible = carteVisible;
+	}
+
+	@Override
+	public String toString() {
+		return "Joueur [idJoueur=" + idJoueur + ", nomJoueur=" + nomJoueur
+				+ ", main=" + main + ", carteCachee=" + carteCachee
+				+ ", carteVisible=" + carteVisible + "]";
+	}
 }

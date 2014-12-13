@@ -8,20 +8,23 @@ public class CarteCachee extends ZoneDeJeu {
 		super(nbCarte, cartesCachee);
 	}
 
+	public void ajouterCarteCachee(Carte c){
+		super.ajouterCarte(c);
+	}
 	public int getNbCarte() {
-		return nbCarte;
+		return super.getNbCarte();
 	}
 
 	public void setNbCarte(int nbCarte) {
-		this.nbCarte = nbCarte;
+		super.setNbCarte(nbCarte);
 	}
 
 	public JeuDeCarte getCartesCachee() {
-		return cartesCachee;
+		return super.getJeuDeCarteMelange();
 	}
 
 	public void setCartesCachee(JeuDeCarte cartesCachee) {
-		this.cartesCachee = cartesCachee;
+		super.setJeuDeCarteMelange(cartesCachee);
 	}
 
 }

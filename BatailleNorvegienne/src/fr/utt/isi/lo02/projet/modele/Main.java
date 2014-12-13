@@ -9,20 +9,24 @@ public class Main extends ZoneDeJeu{
 		super(nbCarte, cartesMain);
 	}
 
+	public void ajouterCarteMain(Carte c){
+		super.ajouterCarte(c);
+	}
+	
 	public int getNbCarte() {
-		return nbCarte;
+		return super.getNbCarte();
 	}
 
 	public void setNbCarte(int nbCarte) {
-		this.nbCarte = nbCarte;
+		super.setNbCarte(nbCarte);
 	}
 
 	public JeuDeCarte getCartesMain() {
-		return cartesMain;
+		return super.getJeuDeCarteMelange();
 	}
 
 	public void setCartesMain(JeuDeCarte cartesMain) {
-		this.cartesMain = cartesMain;
+		super.setJeuDeCarteMelange(cartesMain);
 	}
 
 	public void choisirCarte(JeuDeCarte carte){

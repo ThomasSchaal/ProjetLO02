@@ -7,7 +7,11 @@ public class ZoneDeJeu {
 	
 	public ZoneDeJeu(int nbCarte, JeuDeCarte jeuDeCarteMelange){
 		this.nbCarte=nbCarte;
-		this.setJeuDeCarteMelange(jeuDeCarteMelange);
+		this.jeuDeCarteMelange=jeuDeCarteMelange;
+	}
+	
+	public void ajouterCarte(Carte c){
+		this.getJeuDeCarteMelange().add(c);
 	}
 	
 	public int getNbCarte(){

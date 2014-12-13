@@ -8,37 +8,36 @@ import java.util.ListIterator;
 import fr.utt.isi.lo02.projet.modele.Carte.COULEUR;
 import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
 
-public class JeuDeCarte {
-	private LinkedList<Carte> jeuDeCarte;
+public class JeuDeCarte extends LinkedList<Carte> {
 
 	public JeuDeCarte() {
-		jeuDeCarte = new LinkedList<Carte>();
 		int idCarte = 0;
 		for (COULEUR c : COULEUR.values()) {
 			for (FORCE f : FORCE.values()) {
 				idCarte++;
 				Carte carte = new Carte(idCarte, c, f);
-				jeuDeCarte.add(carte);
+				add(carte);
 			}
 		}
 	}
-
-	public void battreLeJeu() {
-		// shuffle it !
-		Collections.shuffle(jeuDeCarte);
+	
+	public JeuDeCarte(LinkedList<Carte> jeuDeCarte){
+		//this.jeuDeCarte=jeuDeCarte;
 	}
 
-	public void distribuerCarte(JeuDeCarte jdc) {
-		/*ListIterator li = ((List<Carte>) jdc).listIterator();
-		Joueur[] tabJoueur = Joueur.listJoueur();
-		while (li.hasNext())
-			System.out.println(li.next());*/
-
+	public void battreLeJeu() {
+	//	Collections.shuffle(jeuDeCarte);
 	}
 
 	@Override
 	public String toString() {
-		return "JeuDeCarte [jeuDeCarte=" + jeuDeCarte + "]";
+		StringBuffer sb = new StringBuffer();
+		for (Carte c : this)
+			sb.append(c + "\n");
+		return sb.toString();
 	}
 
+	
+
+	
 }
