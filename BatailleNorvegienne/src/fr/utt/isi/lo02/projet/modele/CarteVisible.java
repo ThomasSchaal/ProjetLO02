@@ -21,7 +21,7 @@ public class CarteVisible extends ZoneDeJeu {
 		super.setNbCarte(i);
 	}
 	
-	public JeuDeCarte getCarteVisible(){
+	public JeuDeCarte getCartesVisible(){
 		return super.getJeuDeCarteMelange();
 	}
 	

@@ -13,18 +13,18 @@ public class Pioche extends ZoneDeJeu{
 	}
 
 	public int getNbCartePioche() {
-		return nbCartePioche;
+		return super.getNbCarte();
 	}
 
 	public void setNbCartePioche(int nbCartePioche) {
-		this.nbCartePioche = nbCartePioche;
+		super.setNbCarte(nbCartePioche);
 	}
 
 	public JeuDeCarte getCartesDeLaPioche() {
-		return cartesDeLaPioche;
+		return super.getJeuDeCarteMelange();
 	}
 
 	public void setCartesDeLaPioche(JeuDeCarte cartesDeLaPioche) {
-		this.cartesDeLaPioche = cartesDeLaPioche;
+		super.setJeuDeCarteMelange(cartesDeLaPioche);
 	}
 }

@@ -47,15 +47,12 @@ public class Partie { // Cette class sera p-e dans le controleur
 	}
 
 	public void distribuerCarte() {
-		Joueur[] tabJoueur = Partie.this.getListJoueur();
+2		Joueur[] tabJoueur = Partie.this.getListJoueur();
 		JeuDeCarte jdc = new JeuDeCarte();
+		Pioche pio ;
 //		jdc.battreLeJeu();
-
-//		JeuDeCarte joke = new JeuDeCarte(null);
-//		Pioche pio = new Pioche(0, joke);
-
-		System.out.println("Taille du tableau de joueur "+tabJoueur.length);
-		for (int i = 0; i <= tabJoueur.length ; i++) {
+		
+		for (int i = 0; i <= (tabJoueur.length-1) ; i++) {
 				while (tabJoueur[i].getMain().getNbCarte() < 3) {
 					tabJoueur[i].getMain().ajouterCarteMain(jdc.pop());
 					tabJoueur[i].getMain().setNbCarte(tabJoueur[i].getMain().getNbCarte() + 1);
@@ -70,18 +67,18 @@ public class Partie { // Cette class sera p-e dans le controleur
 					tabJoueur[i].getCarteVisible().ajouterCarteVisible(jdc.pop()); // no such element 
 					tabJoueur[i].getCarteVisible().setNbCarte(tabJoueur[i].getCarteVisible().getNbCarte() + 1);
 				}
-				 System.out.println("Carte Visible "	+ tabJoueur[i].getCarteVisible().getCarteVisible().toString());
-//			pio.ajouterCartePioche(jdc.pop());
-//			pio.setNbCarte(pio.getNbCartePioche() + 1);
+				 System.out.println("Carte Visible "	+ tabJoueur[i].getCarteVisible().getCartesVisible().toString());
 		}
+		JeuDeCarte joke = new JeuDeCarte(null); 
+		int nb = jdc.size();
+		joke.addAll(jdc);
+		pio = new Pioche(nb, joke);
+		System.out.println(pio.getCartesDeLaPioche().toString());
 	}
 
 	public static void main(String[] args) {
 
 		Partie p1 = new Partie(Joueur.listJoueur());
-		// JeuDeCarte jdc = new JeuDeCarte();
-		// jdc.battreLeJeu();
-		// System.out.println(jdc.toString());
 		p1.distribuerCarte();
 
 		System.out.println(p1.getListJoueur().toString());
