@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.projet.modele;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -17,8 +18,6 @@ public class Joueur {
 		this.carteCachee = cc;
 		this.carteVisible = cv;	
 	}
-
-
 
 	/**
 	 * Demande un nombre de joueur 
@@ -39,11 +38,11 @@ public class Joueur {
 
 	/**
 	 * Créer un tableau de Joueur en fonction du nombre de joueur
-	 * @return tabJoueur un tableau de joueur
+	 * @return un tableau de joueur
 	 */
-	public static Joueur[] listJoueur() {
+	public static ArrayList<Joueur> listJoueur() {
 		int nbJoueur = choisirNbJoueur();
-		Joueur[] tabJoueur = new Joueur[nbJoueur];
+		ArrayList<Joueur> tabJoueur = new ArrayList<>();
 		for (int i = 0; i < nbJoueur; i++) {
 			JeuDeCarte jdcMain = new JeuDeCarte(null); 
 			JeuDeCarte jdcCC = new JeuDeCarte(null); 
@@ -52,7 +51,7 @@ public class Joueur {
 			CarteCachee cc = new CarteCachee(0, jdcCC);
 			CarteVisible cv = new CarteVisible(0, jdcCV);
 			Joueur j = new Joueur(i, m, cc, cv);
-			tabJoueur[i] = j;
+			tabJoueur.add(j);
 		}
 		return tabJoueur;
 	}
@@ -61,6 +60,14 @@ public class Joueur {
 
 	}
 
+	public Carte choisirCarteMain(){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Veuillez choisir une des cartes de votre main (1, 2, 3, ...) :");
+		int numCarte = sc.nextInt();
+		System.out.println("Vous avez choisit la carte  : " + this.getMain().getCartesMain().get(numCarte-1));
+		return  this.getMain().getCartesMain().remove(numCarte-1);
+	}
+	
 	public int getIdJoueur() {
 		return idJoueur;
 	}
@@ -105,6 +112,6 @@ public class Joueur {
 	public String toString() {
 		return "Joueur [idJoueur=" + idJoueur + ", nomJoueur=" + nomJoueur
 				+ ", main=" + main + ", carteCachee=" + carteCachee
-				+ ", carteVisible=" + carteVisible + "]";
+				+ ", carteVisible=" + carteVisible + "]\n";
 	}
 }

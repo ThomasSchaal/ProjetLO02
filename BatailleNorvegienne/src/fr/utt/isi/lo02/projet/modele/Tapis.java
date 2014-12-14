@@ -12,20 +12,24 @@ public class Tapis extends ZoneDeJeu {
 		 
 	 }
 	 
+	 public void ajouterCarteTapis(Carte c){
+		 super.ajouterCarte(c);
+	 }
+	 
 	 public int getNbCarte() {
-		return nbCarte;
+		return super.getNbCarte();
 	}
 
 	public void setNbCarte(int nbCarte) {
-		this.nbCarte = nbCarte;
+		super.setNbCarte(nbCarte);
 	}
 
 	public JeuDeCarte getCartesTapis() {
-		return cartesTapis;
+		return super.getJeuDeCarteMelange();
 	}
 
 	public void setCartesTapis(JeuDeCarte cartesTapis) {
-		this.cartesTapis = cartesTapis;
+		super.setJeuDeCarteMelange(cartesTapis);
 	}
 
 	public void becher(){

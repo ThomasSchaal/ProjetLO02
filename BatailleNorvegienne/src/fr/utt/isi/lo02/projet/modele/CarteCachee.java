@@ -8,6 +8,10 @@ public class CarteCachee extends ZoneDeJeu {
 		super(nbCarte, cartesCachee);
 	}
 
+	public void afficherCarteCachee(Joueur j){
+		j.getCarteCachee().toString();
+	}
+	
 	public void ajouterCarteCachee(Carte c){
 		super.ajouterCarte(c);
 	}

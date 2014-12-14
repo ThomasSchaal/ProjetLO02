@@ -8,6 +8,18 @@ public class Pioche extends ZoneDeJeu{
 		super(nbCartePioche, jeuCartePioche);
 	}
 	
+	public Carte prendreCarteDuDessus(){	
+		return getCartesDeLaPioche().pollFirst();
+	}
+	
+	public boolean piocheVide(JeuDeCarte jdc){
+		boolean estVide=false; 
+		if (jdc.isEmpty()){
+			estVide = true; 
+		}
+		return estVide;
+	}
+		
 	public void ajouterCartePioche(Carte c){
 		super.ajouterCarte(c);
 	}
