@@ -12,8 +12,14 @@ public class Carte {
 	}
 
 	public enum FORCE {
-		deux, trois, quatre, cinq, six, sept, huit, neuf, dix, valet, dame, roi, as;
-	}
+		deux(2) , trois(3), quatre(4), cinq(5), six(6), sept(7), huit(8), neuf(9), dix(10), valet(11), dame(12), roi(13), as(14);
+		private int value;
+		
+		private FORCE(int value){
+			this.value =value;
+		}
+	};
+
 
 	public Carte(int idCarte,  COULEUR couleurCarte,
 			FORCE force) {
@@ -23,6 +29,7 @@ public class Carte {
 		
 	}
 
+	
 	public int getIdCarte() {
 		return idCarte;
 	}
