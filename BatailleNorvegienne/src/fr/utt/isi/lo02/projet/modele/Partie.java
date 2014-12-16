@@ -73,7 +73,6 @@ public class Partie { // Cette class sera p-e dans le controleur
 	}
 
 	public boolean verifierCartePosable(Carte c, Partie p) {
-		System.out.println("Ordinal : "+ c.getForce().ordinal());
 		if (c.getForce().ordinal() >= p.getTapis().getCartesTapis().getLast().getForce().ordinal()) {
 			System.out.println("Awesome !!");
 			return true;

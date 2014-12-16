@@ -31,7 +31,7 @@ public class Joueur {
 
 		if (nbJoueur > 10) {
 			System.out.println("Entre 1 et 10, c'est pas compliqué non ? ");
-			choisirNbJoueur();
+			return choisirNbJoueur();
 		}
 		return nbJoueur;
 	}
@@ -65,7 +65,12 @@ public class Joueur {
 		System.out.println("Veuillez choisir une des cartes de votre main (1, 2, 3, ...) :");
 		int numCarte = sc.nextInt();
 		
-		return  this.getMain().getCartesMain().remove(numCarte-1);
+		if (numCarte > this.getMain().getNbCarte()) {
+			System.out.println("Entrer un chiffre correspondant au nombre de carte de la main ");
+			return choisirCarteMain();
+		}
+		
+		return  this.getMain().getCartesMain().get(numCarte-1);
 	}
 	
 	public int getIdJoueur() {

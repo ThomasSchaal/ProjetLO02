@@ -34,6 +34,7 @@ public class Test {
 				Carte carte = p1.getListJoueur().get(i).choisirCarteMain();
 				if (p1.getTapis().getCartesTapis().isEmpty()) {
 					p1.getTapis().ajouterCarteTapis(carte);
+					p1.getListJoueur().get(i).getMain().getCartesMain().remove(carte);
 				} else {
 					if (p1.verifierCartePosable(carte, p1)){
 						p1.getTapis().ajouterCarteTapis(carte);
@@ -44,8 +45,10 @@ public class Test {
 							carte2 = p1.getListJoueur().get(i).choisirCarteMain();
 						}
 						p1.getTapis().ajouterCarteTapis(carte2);
+						p1.getListJoueur().get(i).getMain().getCartesMain().remove(carte2);
 					}
 				}
+				
 				
 				/**
 				 * Pioche une carte et la met dans la main
