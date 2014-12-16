@@ -1,5 +1,7 @@
 package fr.utt.isi.lo02.projet.modele;
 
+import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
+
 public class Carte {
 
 	protected int idCarte;

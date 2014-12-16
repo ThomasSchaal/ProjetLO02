@@ -64,7 +64,7 @@ public class Joueur {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez choisir une des cartes de votre main (1, 2, 3, ...) :");
 		int numCarte = sc.nextInt();
-		System.out.println("Vous avez choisit la carte  : " + this.getMain().getCartesMain().get(numCarte-1));
+		
 		return  this.getMain().getCartesMain().remove(numCarte-1);
 	}
 	
