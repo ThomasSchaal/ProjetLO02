@@ -29,7 +29,7 @@ public class Test {
 				/**
 				 * Choisit une carte  // pose la carte sur le tapis
 				 * Vérification que la carte est posable 
-				 * Ne gère pas si le joueur n'a pas de carte posable -> CRASH
+				 * TODO : Ne gère pas si le joueur n'a pas de carte posable -> CRASH
 				 */
 				Carte carte = p1.getListJoueur().get(i).choisirCarteMain();
 				if (p1.getTapis().getCartesTapis().isEmpty()) {
@@ -38,10 +38,11 @@ public class Test {
 				} else {
 					if (p1.verifierCartePosable(carte, p1)){
 						p1.getTapis().ajouterCarteTapis(carte);
+						p1.getListJoueur().get(i).getMain().getCartesMain().remove(carte);
 					}else {
 						Carte carte2=carte;
 						while(p1.verifierCartePosable(carte2, p1) == false){
-							System.out.println(p1.getListJoueur().get(i).getMain().getCartesMain().toString());
+							System.out.println("Choisissez une autre carte, voici les cartes de votre main :\n" + p1.getListJoueur().get(i).getMain().getCartesMain().toString());
 							carte2 = p1.getListJoueur().get(i).choisirCarteMain();
 						}
 						p1.getTapis().ajouterCarteTapis(carte2);

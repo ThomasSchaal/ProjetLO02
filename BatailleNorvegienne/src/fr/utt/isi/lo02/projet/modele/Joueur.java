@@ -66,10 +66,9 @@ public class Joueur {
 		int numCarte = sc.nextInt();
 		
 		if (numCarte > this.getMain().getNbCarte()) {
-			System.out.println("Entrer un chiffre correspondant au nombre de carte de la main ");
+			System.out.println("Entrer un chiffre correspondant au nombre de carte de la main");
 			return choisirCarteMain();
 		}
-		
 		return  this.getMain().getCartesMain().get(numCarte-1);
 	}
 	
