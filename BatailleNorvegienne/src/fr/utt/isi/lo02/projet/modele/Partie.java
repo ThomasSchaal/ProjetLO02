@@ -3,6 +3,8 @@ package fr.utt.isi.lo02.projet.modele;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
+
 public class Partie {
 
 	private static Partie uniqueInstance;
@@ -53,6 +55,10 @@ public class Partie {
 				 */
 				Carte carte = Partie.getInstance().getListJoueur()
 						.get(i).choisirCarteMain();
+				
+				if(carte.estSpeciale()){
+					carte.actionCarteSpeciale(carte, i);
+				}
 				if (Partie.getInstance().getTapis().getCartesTapis()
 						.isEmpty()) {
 					Partie.getInstance().getTapis()
@@ -60,7 +66,7 @@ public class Partie {
 					Partie.getInstance().getListJoueur().get(i)
 							.getMain().getCartesMain().remove(carte);
 				} else {
-					if (Partie.getInstance().verifierCartePosable(
+					if (Partie.getInstance().verifierCartePosablePositif(
 							carte)) {
 						Partie.getInstance().getTapis()
 								.ajouterCarteTapis(carte);
@@ -70,7 +76,7 @@ public class Partie {
 						Carte carte2 = carte;
 						int compteur = 0;
 						while (Partie.getInstance()
-								.verifierCartePosable(carte2) == false
+								.verifierCartePosablePositif(carte2) == false
 								&& compteur <= Partie.getInstance()
 										.getListJoueur().get(i).getMain()
 										.getNbCarte()) {
@@ -177,7 +183,7 @@ public class Partie {
 		nbTour++;
 	}
 
-	public boolean verifierCartePosable(Carte c) {
+	public boolean verifierCartePosablePositif(Carte c) {
 		if (c.getForce().ordinal() >= Partie.getInstance().getTapis()
 				.getCartesTapis().getLast().getForce().ordinal()) {
 			System.out.println("Awesome !!");
@@ -187,6 +193,17 @@ public class Partie {
 		}
 
 	}
+	
+	public boolean verifierCartePosableNegatif(Carte c) {
+		if (c.getForce().ordinal() <= FORCE.sept.ordinal()){ //Partie.getInstance().getTapis().getCartesTapis().getLast().getForce().ordinal()) {
+			System.out.println("Vous venez de jouer une carte inférieur ou égal à 7");
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+	
 
 	public void incrementerJoueurActif() {
 

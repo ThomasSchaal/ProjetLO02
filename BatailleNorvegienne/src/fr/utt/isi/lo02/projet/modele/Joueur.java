@@ -28,7 +28,6 @@ public class Joueur {
 		System.out.println("Veuillez choisir un nombre de joueurs entre 1 et 10 :");
 		int nbJoueur = sc.nextInt();
 		System.out.println("Vous avez saisi : " + nbJoueur);
-		//sc.close();
 		if (nbJoueur > 10) {
 			System.out.println("Entre 1 et 10, c'est pas compliqué non ? ");
 			return choisirNbJoueur();
@@ -69,14 +68,22 @@ public class Joueur {
 			System.out.println("Entrer un chiffre correspondant au nombre de carte de la main");
 			return choisirCarteMain();
 		}
-	//	sc.close();
 		return  this.getMain().getCartesMain().get(numCarte-1);
 	}
 	
-//	public Joueur getJoueur(){
-//		return 
-//	}
+	public int choisirJoueur(){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Veuillez choisir un joueur cible (1, 2, 3 .... ) ");
+		int idJoueur = sc.nextInt();
+		
+		if(idJoueur > Partie.getInstance().getNbJoueur()){
+			System.out.println("Entrer un chiffre correspondant au nombre de joueur dans la partie");
+			return choisirJoueur();
+		}
+		return idJoueur;
+	}
 	
+
 	public int getIdJoueur() {
 		return idJoueur;
 	}

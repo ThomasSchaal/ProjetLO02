@@ -43,7 +43,7 @@ public class Tapis extends ZoneDeJeu {
 		Partie.getInstance().getTapis().ajouterCarte(c);
 	 }
 	
-	public void becher(PartieSansSingleton p){
+	public void becher(){
 		Partie.getInstance().getTapis().getCartesTapis().clear();
 	}
 }

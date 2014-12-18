@@ -1,5 +1,7 @@
 package fr.utt.isi.lo02.projet.modele;
 
+import java.util.Iterator;
+
 import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
 
 public class Carte {
@@ -31,6 +33,75 @@ public class Carte {
 		
 	}
 
+	public boolean estSpeciale() {
+		boolean resultat = false;
+		switch (this.getForce()) {
+		case deux:
+			resultat = true;
+			break;
+		case sept:
+			resultat = true;
+			break;
+		case huit:
+			resultat = true;
+			break;
+		case dix:
+			resultat = true;
+			break;
+		case as:
+			resultat = true;
+			break;
+		default:
+			resultat = false;
+			break;
+		}
+		return resultat;
+	}
+	
+	public void actionCarteSpeciale(Carte c, int i){
+		
+		switch(c.getForce()){
+		case deux:
+			// TODO Action carte 2, annule un vérifier posable et se pose dans tout les cas 
+			
+			break;
+		case sept:
+			// TODO Action carte 7, créer un vérifier posable alternatif / fonctionne mais pas avec la bonne carte 
+			actionSept(c); // faux, doit prendre la carte du joueur suivant et pas la carte spéciale
+			break;
+		case huit:
+			// Fonctionne pas
+			actionHuit();
+			break;
+		case dix:
+			//Fonctionne 
+			actionDix();
+			break;
+		case as:
+			//Fonctionne
+			actionAs(Partie.getInstance().getListJoueur().get(Partie.getInstance().getListJoueur().get(i).choisirJoueur()));
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public static void actionAs(Joueur j){
+		Partie.getInstance().getListJoueur().get(j.getIdJoueur()).getMain().ajouterCarte(Partie.getInstance().getTapis().getCartesTapis());
+	}
+	
+	public static void actionDix(){
+		Partie.getInstance().getTapis().becher();
+	}
+	
+	public static  void actionHuit(){
+		Iterator<Joueur> it = Partie.getInstance().getListJoueur().iterator();
+		it.next();
+	}
+	
+	public static void actionSept(Carte c){
+		Partie.getInstance().verifierCartePosableNegatif(c);
+	}
 	
 	public int getIdCarte() {
 		return idCarte;

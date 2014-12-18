@@ -1,8 +1,5 @@
 package fr.utt.isi.lo02.projet.modele;
 
-import java.util.Iterator;
-
-
 
 public class Main extends ZoneDeJeu{
 	
@@ -39,6 +36,5 @@ public class Main extends ZoneDeJeu{
 
 	public void setCartesMain(JeuDeCarte cartesMain) {
 		super.setJeuDeCarteMelange(cartesMain);
-	}
-	
+	}	
 }
