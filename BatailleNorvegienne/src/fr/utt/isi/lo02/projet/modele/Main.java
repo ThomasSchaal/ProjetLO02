@@ -21,6 +21,10 @@ public class Main extends ZoneDeJeu{
 		super.ajouterCarte(c);
 	}
 	
+	public void ajouterCarteMain(JeuDeCarte jdc){
+		super.ajouterCarte(jdc);
+	}
+	
 	public int getNbCarte() {
 		return super.getNbCarte();
 	}
@@ -37,7 +41,4 @@ public class Main extends ZoneDeJeu{
 		super.setJeuDeCarteMelange(cartesMain);
 	}
 	
-	public void piocher(){
-		
-	}
 }

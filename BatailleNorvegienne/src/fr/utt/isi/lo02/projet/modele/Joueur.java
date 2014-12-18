@@ -28,7 +28,7 @@ public class Joueur {
 		System.out.println("Veuillez choisir un nombre de joueurs entre 1 et 10 :");
 		int nbJoueur = sc.nextInt();
 		System.out.println("Vous avez saisi : " + nbJoueur);
-
+		//sc.close();
 		if (nbJoueur > 10) {
 			System.out.println("Entre 1 et 10, c'est pas compliqué non ? ");
 			return choisirNbJoueur();
@@ -69,8 +69,13 @@ public class Joueur {
 			System.out.println("Entrer un chiffre correspondant au nombre de carte de la main");
 			return choisirCarteMain();
 		}
+	//	sc.close();
 		return  this.getMain().getCartesMain().get(numCarte-1);
 	}
+	
+//	public Joueur getJoueur(){
+//		return 
+//	}
 	
 	public int getIdJoueur() {
 		return idJoueur;

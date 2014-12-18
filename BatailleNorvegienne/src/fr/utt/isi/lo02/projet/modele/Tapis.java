@@ -16,6 +16,10 @@ public class Tapis extends ZoneDeJeu {
 		 super.ajouterCarte(c);
 	 }
 	 
+	 public void ajouterCarteTapis(JeuDeCarte jdc){
+		 super.ajouterCarte(jdc);
+	 }
+	 
 	 public int getNbCarte() {
 		return super.getNbCarte();
 	}
@@ -32,7 +36,14 @@ public class Tapis extends ZoneDeJeu {
 		super.setJeuDeCarteMelange(cartesTapis);
 	}
 
-	public void becher(){
-		 
+	public void cocogne(int joueurActuel){
+		Carte c = Partie.getInstance().getTapis().getCartesTapis().getLast();
+		Partie.getInstance().getListJoueur().get(joueurActuel).getMain().ajouterCarte(Partie.getInstance().getTapis().getCartesTapis());
+		Partie.getInstance().getTapis().getCartesTapis().clear();
+		Partie.getInstance().getTapis().ajouterCarte(c);
 	 }
+	
+	public void becher(PartieSansSingleton p){
+		Partie.getInstance().getTapis().getCartesTapis().clear();
+	}
 }

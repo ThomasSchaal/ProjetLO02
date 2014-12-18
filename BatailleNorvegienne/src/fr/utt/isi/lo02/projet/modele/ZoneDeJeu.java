@@ -14,6 +14,10 @@ public class ZoneDeJeu {
 		this.getJeuDeCarteMelange().add(c);
 	}
 	
+	public void ajouterCarte(JeuDeCarte jdc){
+		this.getJeuDeCarteMelange().addAll(jdc);
+	}
+	
 	public int getNbCarte(){
 		return nbCarte; 
 	}

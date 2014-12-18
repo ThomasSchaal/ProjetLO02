@@ -3,30 +3,135 @@ package fr.utt.isi.lo02.projet.modele;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Partie { // Cette class sera p-e dans le controleur
+public class Partie {
 
-	private ArrayList<Joueur> listJoueur;
+	private static Partie uniqueInstance;
+	private static ArrayList<Joueur> listJoueur;
 	private Tapis tapis;
 	private Pioche pioche;
-	// private int joueurActif;
 	private int nbTour;
 
-	public Partie(ArrayList<Joueur> listJoueur) {// , int joueurActif, int
-													// nbTour){
+	private Partie(ArrayList<Joueur> listJoueur) {
+		// PartieSingleton.listJoueur = listJoueur;
 		this.listJoueur = listJoueur;
 		JeuDeCarte jdcTapis = new JeuDeCarte(null);
 		JeuDeCarte jdcPioche = new JeuDeCarte(null);
 		this.tapis = new Tapis(0, jdcTapis);
 		this.pioche = new Pioche(0, jdcPioche);
-		// this.joueurActif=joueurActif;
-		// this.nbTour=nbTour;
+	}
+
+	public static synchronized Partie getInstance() {
+		if (uniqueInstance == null) {
+			uniqueInstance = new Partie(Joueur.listJoueur());
+		}
+
+		return uniqueInstance;
+	}
+
+	public void jouer() {
+		/**
+		 * Distribue les cartes en début de partie
+		 */
+		Partie.getInstance().distribuerCarte();
+
+		while (!Partie.getInstance().getPioche().getCartesDeLaPioche()
+				.isEmpty()) {
+			for (int i = 0; i < Partie.getInstance().getListJoueur()
+					.size(); i++) {
+
+				/**
+				 * Affiche les cartes de la main
+				 */
+				System.out.println(Partie.getInstance()
+						.getListJoueur().get(i).getMain().getCartesMain()
+						.toString());
+
+				/**
+				 * Choisit une carte // pose la carte sur le tapis Vérification
+				 * que la carte est posable TODO : Ne gère pas si le joueur n'a
+				 * pas de carte posable -> CRASH plus mais ne fait rien
+				 */
+				Carte carte = Partie.getInstance().getListJoueur()
+						.get(i).choisirCarteMain();
+				if (Partie.getInstance().getTapis().getCartesTapis()
+						.isEmpty()) {
+					Partie.getInstance().getTapis()
+							.ajouterCarteTapis(carte);
+					Partie.getInstance().getListJoueur().get(i)
+							.getMain().getCartesMain().remove(carte);
+				} else {
+					if (Partie.getInstance().verifierCartePosable(
+							carte)) {
+						Partie.getInstance().getTapis()
+								.ajouterCarteTapis(carte);
+						Partie.getInstance().getListJoueur().get(i)
+								.getMain().getCartesMain().remove(carte);
+					} else {
+						Carte carte2 = carte;
+						int compteur = 0;
+						while (Partie.getInstance()
+								.verifierCartePosable(carte2) == false
+								&& compteur <= Partie.getInstance()
+										.getListJoueur().get(i).getMain()
+										.getNbCarte()) {
+							System.out
+									.println("Choisissez une autre carte, voici les cartes de votre main :\n"
+											+ Partie.getInstance()
+													.getListJoueur().get(i)
+													.getMain().getCartesMain()
+													.toString());
+							carte2 = Partie.getInstance()
+									.getListJoueur().get(i).choisirCarteMain();
+							compteur++;
+						}
+						if (compteur == Partie.getInstance()
+								.getListJoueur().get(i).getMain().getNbCarte()) {
+							// Méthode pour dire que le tour est finit
+							Partie.getInstance().getTapis().cocogne(i);
+						}
+						Partie.getInstance().getTapis()
+								.ajouterCarteTapis(carte2);
+						Partie.getInstance().getListJoueur().get(i)
+								.getMain().getCartesMain().remove(carte2);
+					}
+				}
+
+				/**
+				 * Pioche une carte et la met dans la main En commentaire : la
+				 * partie qui permet de remplir si on pose plusieurs cartes et
+				 * du coup qu'il faut en piocher plusieurs
+				 */
+				// System.out.println("Avant avoir tirer une carte "+p1.getListJoueur().get(i).getMain().getNbCarte());
+				// if(p1.getListJoueur().get(i).getMain().getNbCarte()<3){
+				// while(p1.getListJoueur().get(i).getMain().getNbCarte()==3){
+				Partie
+						.getInstance()
+						.getListJoueur()
+						.get(i)
+						.getMain()
+						.ajouterCarteMain(
+								Partie.getInstance().getPioche()
+										.prendreCarteDuDessus());
+				// }
+				// }
+				// System.out.println("Après avoir tirer une carte "+p1.getListJoueur().get(i).getMain().getNbCarte());
+
+				/**
+				 * Afficher la dernière carte du tapis (celle du dessus)
+				 */
+				System.out
+						.println("Fin du tour \nAffichage de la carte au dessus du tas "
+								+ Partie.getInstance().getTapis()
+										.getCartesTapis().getLast().toString());
+			}
+		}
 	}
 
 	/**
 	 * Cette méthode distribue les cartes à chaque joueurs et créé une pioche
 	 */
 	public void distribuerCarte() {
-		ArrayList<Joueur> tabJoueur = Partie.this.getListJoueur();
+		ArrayList<Joueur> tabJoueur = this.getListJoueur();
 		JeuDeCarte jdc = new JeuDeCarte();
 		Pioche pio;
 
@@ -72,19 +177,28 @@ public class Partie { // Cette class sera p-e dans le controleur
 		nbTour++;
 	}
 
-	public boolean verifierCartePosable(Carte c, Partie p) {
-		if (c.getForce().ordinal() >= p.getTapis().getCartesTapis().getLast().getForce().ordinal()) {
+	public boolean verifierCartePosable(Carte c) {
+		if (c.getForce().ordinal() >= Partie.getInstance().getTapis()
+				.getCartesTapis().getLast().getForce().ordinal()) {
 			System.out.println("Awesome !!");
 			return true;
-		}else {
-			return false; 
+		} else {
+			return false;
 		}
-		
+
 	}
 
 	public void incrementerJoueurActif() {
 
 	}
+
+	// public boolean aGagne(){
+	// if(this.getListJoueur().get(index).getMain().getCartesMain().isEmpty()){
+	// System.out.println("Le joueur "+this.getListJoueur().get(i).toString()+" a gagné !");
+	// return true;
+	// }
+	// System.exit(0);
+	// }
 
 	public int getNbJoueur() {
 		return listJoueur.size();

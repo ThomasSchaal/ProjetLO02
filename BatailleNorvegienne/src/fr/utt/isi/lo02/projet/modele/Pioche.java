@@ -23,6 +23,10 @@ public class Pioche extends ZoneDeJeu{
 	public void ajouterCartePioche(Carte c){
 		super.ajouterCarte(c);
 	}
+	
+	public void ajouterCartePioche(JeuDeCarte jdc){
+		super.ajouterCarte(jdc);
+	}
 
 	public int getNbCartePioche() {
 		return super.getNbCarte();

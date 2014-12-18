@@ -15,6 +15,11 @@ public class CarteCachee extends ZoneDeJeu {
 	public void ajouterCarteCachee(Carte c){
 		super.ajouterCarte(c);
 	}
+	
+	public void ajouterCarteCachee(JeuDeCarte jdc){
+		super.ajouterCarte(jdc);
+	}
+	
 	public int getNbCarte() {
 		return super.getNbCarte();
 	}

@@ -9,12 +9,20 @@ public class CarteVisible extends ZoneDeJeu {
 		super(nbCarte, cartesVisible);
 	}
 	
+	public Carte prendreCarteVisible(){	
+		return getCartesVisible().pollFirst();
+	}
+	
 	public void afficherCarteVisible(Joueur j){
 		j.getCarteVisible().toString();
 	}
 	
 	public void ajouterCarteVisible(Carte c){
 		super.ajouterCarte(c);
+	}
+	
+	public void ajouterCarteVisible(JeuDeCarte jdc){
+		super.ajouterCarte(jdc);
 	}
 	
 	public int getNbCarteVisible(){
