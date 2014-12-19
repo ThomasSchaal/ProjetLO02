@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class Joueur {
+public abstract class Joueur {
 	protected int idJoueur;
 	protected String nomJoueur;
-	private Main main;
-	private CarteCachee carteCachee;
-	private CarteVisible carteVisible;
+	protected Main main;
+	protected CarteCachee carteCachee;
+	protected CarteVisible carteVisible;
 
 	// TODO rajouter le nom au joueur
 	public Joueur(int idJoueur, Main m, CarteCachee cc, CarteVisible cv) {
@@ -28,7 +28,7 @@ public class Joueur {
 		System.out.println("Veuillez choisir un nombre de joueurs entre 1 et 10 :");
 		int nbJoueur = sc.nextInt();
 		System.out.println("Vous avez saisi : " + nbJoueur);
-		if (nbJoueur > 10) {
+		if (nbJoueur > 10 || nbJoueur == 0) {
 			System.out.println("Entre 1 et 10, c'est pas compliqué non ? ");
 			return choisirNbJoueur();
 		}
@@ -42,15 +42,23 @@ public class Joueur {
 	public static ArrayList<Joueur> listJoueur() {
 		int nbJoueur = choisirNbJoueur();
 		ArrayList<Joueur> tabJoueur = new ArrayList<>();
-		for (int i = 0; i < nbJoueur; i++) {
-			JeuDeCarte jdcMain = new JeuDeCarte(null); 
-			JeuDeCarte jdcCC = new JeuDeCarte(null); 
-			JeuDeCarte jdcCV = new JeuDeCarte(null); 
-			Main m =new Main(0, jdcMain);
-			CarteCachee cc = new CarteCachee(0, jdcCC);
-			CarteVisible cv = new CarteVisible(0, jdcCV);
-			Joueur j = new Joueur(i, m, cc, cv);
-			tabJoueur.add(j);
+		JeuDeCarte jdcMain = new JeuDeCarte(null); 
+		JeuDeCarte jdcCC = new JeuDeCarte(null); 
+		JeuDeCarte jdcCV = new JeuDeCarte(null); 
+		Main m =new Main(0, jdcMain);
+		CarteCachee cc = new CarteCachee(0, jdcCC);
+		CarteVisible cv = new CarteVisible(0, jdcCV);
+		Joueur j = new JoueurReel(0, m, cc, cv);
+		tabJoueur.add(j);
+		for (int i = 1; i < nbJoueur; i++) {
+			JeuDeCarte jdcMain1 = new JeuDeCarte(null); 
+			JeuDeCarte jdcCC1 = new JeuDeCarte(null); 
+			JeuDeCarte jdcCV1 = new JeuDeCarte(null); 
+			Main m1 =new Main(0, jdcMain1);
+			CarteCachee cc1 = new CarteCachee(0, jdcCC1);
+			CarteVisible cv1 = new CarteVisible(0, jdcCV1); 
+			JoueurVirtuel v = new JoueurVirtuel(0, m1, cc1, cv1);
+			tabJoueur.add(v);
 		}
 		return tabJoueur;
 	}
@@ -64,7 +72,7 @@ public class Joueur {
 		System.out.println("Veuillez choisir une des cartes de votre main (1, 2, 3, ...) :");
 		int numCarte = sc.nextInt();
 		
-		if (numCarte > this.getMain().getNbCarte()) {
+		if (numCarte > this.getMain().getNbCarte() || numCarte == 0) {
 			System.out.println("Entrer un chiffre correspondant au nombre de carte de la main");
 			return choisirCarteMain();
 		}
@@ -73,7 +81,7 @@ public class Joueur {
 	
 	public int choisirJoueur(){
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Veuillez choisir un joueur cible (1, 2, 3 .... ) ");
+		System.out.println("Veuillez choisir un joueur cible (0, 1, 2, 3 .... ) ");
 		int idJoueur = sc.nextInt();
 		
 		if(idJoueur > Partie.getInstance().getNbJoueur()){
@@ -124,6 +132,9 @@ public class Joueur {
 		this.carteVisible = carteVisible;
 	}
 
+	public abstract IStrategie getStrategy();
+	
+	
 	@Override
 	public String toString() {
 		return "Joueur [idJoueur=" + idJoueur + ", nomJoueur=" + nomJoueur

@@ -2,6 +2,7 @@ package fr.utt.isi.lo02.projet.modele;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
 
@@ -14,7 +15,6 @@ public class Partie {
 	private int nbTour;
 
 	private Partie(ArrayList<Joueur> listJoueur) {
-		// PartieSingleton.listJoueur = listJoueur;
 		this.listJoueur = listJoueur;
 		JeuDeCarte jdcTapis = new JeuDeCarte(null);
 		JeuDeCarte jdcPioche = new JeuDeCarte(null);
@@ -38,67 +38,80 @@ public class Partie {
 
 		while (!Partie.getInstance().getPioche().getCartesDeLaPioche()
 				.isEmpty()) {
-			for (int i = 0; i < Partie.getInstance().getListJoueur()
-					.size(); i++) {
+			for (int i = 0; i < Partie.getInstance().getListJoueur().size(); i++) {
 
 				/**
 				 * Affiche les cartes de la main
 				 */
-				System.out.println(Partie.getInstance()
-						.getListJoueur().get(i).getMain().getCartesMain()
-						.toString());
+				System.out.println(Partie.getInstance().getListJoueur().get(i)
+						.getMain().getCartesMain().toString());
 
-				/**
-				 * Choisit une carte // pose la carte sur le tapis Vérification
-				 * que la carte est posable TODO : Ne gère pas si le joueur n'a
-				 * pas de carte posable -> CRASH plus mais ne fait rien
-				 */
-				Carte carte = Partie.getInstance().getListJoueur()
-						.get(i).choisirCarteMain();
-				
-				if(carte.estSpeciale()){
-					carte.actionCarteSpeciale(carte, i);
-				}
-				if (Partie.getInstance().getTapis().getCartesTapis()
-						.isEmpty()) {
-					Partie.getInstance().getTapis()
-							.ajouterCarteTapis(carte);
-					Partie.getInstance().getListJoueur().get(i)
-							.getMain().getCartesMain().remove(carte);
+				if (Partie.getInstance().getListJoueur().get(i) instanceof JoueurVirtuel) {
+					Partie.getInstance().getListJoueur().get(i).getStrategy().choisirCarteStrategie(i);
 				} else {
-					if (Partie.getInstance().verifierCartePosablePositif(
-							carte)) {
-						Partie.getInstance().getTapis()
-								.ajouterCarteTapis(carte);
-						Partie.getInstance().getListJoueur().get(i)
-								.getMain().getCartesMain().remove(carte);
-					} else {
-						Carte carte2 = carte;
-						int compteur = 0;
-						while (Partie.getInstance()
-								.verifierCartePosablePositif(carte2) == false
-								&& compteur <= Partie.getInstance()
+
+					/**
+					 * Choisit une carte // pose la carte sur le tapis
+					 * Vérification que la carte est posable 
+					 */
+					boolean jouable = true;
+					if (jouable == true) {
+						Carte carte = Partie.getInstance().getListJoueur()
+								.get(i).choisirCarteMain();
+						if (carte.estSpeciale()) {
+							carte.actionCarteSpeciale(carte, i);
+						}
+						if (Partie.getInstance().getTapis().getCartesTapis()
+								.isEmpty()) {
+							Partie.getInstance().getTapis()
+									.ajouterCarteTapis(carte);
+							Partie.getInstance().getListJoueur().get(i)
+									.getMain().getCartesMain().remove(carte);
+						} else {
+							if (Partie.getInstance()
+									.verifierCartePosablePositif(carte)) {
+								Partie.getInstance().getTapis()
+										.ajouterCarteTapis(carte);
+								Partie.getInstance().getListJoueur().get(i)
+										.getMain().getCartesMain()
+										.remove(carte);
+							} else {
+								Carte carte2 = carte;
+								int compteur = 0;
+								while (Partie.getInstance()
+										.verifierCartePosablePositif(carte2) == false
+										&& compteur <= Partie.getInstance()
+												.getListJoueur().get(i)
+												.getMain().getNbCarte()) {
+									System.out
+											.println("Choisissez une autre carte, voici les cartes de votre main :\n"
+													+ Partie.getInstance()
+															.getListJoueur()
+															.get(i).getMain()
+															.getCartesMain()
+															.toString());
+									carte2 = Partie.getInstance()
+											.getListJoueur().get(i)
+											.choisirCarteMain();
+									compteur++;
+								}
+								if (compteur == Partie.getInstance()
 										.getListJoueur().get(i).getMain()
 										.getNbCarte()) {
-							System.out
-									.println("Choisissez une autre carte, voici les cartes de votre main :\n"
-											+ Partie.getInstance()
-													.getListJoueur().get(i)
-													.getMain().getCartesMain()
-													.toString());
-							carte2 = Partie.getInstance()
-									.getListJoueur().get(i).choisirCarteMain();
-							compteur++;
+									// Méthode pour dire que le tour est finit
+									Partie.getInstance().getTapis().cocogne(i);
+									jouable = false;
+								}
+								if (Partie.getInstance()
+										.verifierCartePosablePositif(carte2)) {
+									Partie.getInstance().getTapis()
+											.ajouterCarteTapis(carte2);
+									Partie.getInstance().getListJoueur().get(i)
+											.getMain().getCartesMain()
+											.remove(carte2);
+								}
+							}
 						}
-						if (compteur == Partie.getInstance()
-								.getListJoueur().get(i).getMain().getNbCarte()) {
-							// Méthode pour dire que le tour est finit
-							Partie.getInstance().getTapis().cocogne(i);
-						}
-						Partie.getInstance().getTapis()
-								.ajouterCarteTapis(carte2);
-						Partie.getInstance().getListJoueur().get(i)
-								.getMain().getCartesMain().remove(carte2);
 					}
 				}
 
@@ -108,17 +121,16 @@ public class Partie {
 				 * du coup qu'il faut en piocher plusieurs
 				 */
 				// System.out.println("Avant avoir tirer une carte "+p1.getListJoueur().get(i).getMain().getNbCarte());
-				// if(p1.getListJoueur().get(i).getMain().getNbCarte()<3){
+				 if(Partie.getInstance().getListJoueur().get(i).getMain().getNbCarte() <= 3){
 				// while(p1.getListJoueur().get(i).getMain().getNbCarte()==3){
-				Partie
-						.getInstance()
+				Partie.getInstance()
 						.getListJoueur()
 						.get(i)
 						.getMain()
 						.ajouterCarteMain(
 								Partie.getInstance().getPioche()
 										.prendreCarteDuDessus());
-				// }
+				 }
 				// }
 				// System.out.println("Après avoir tirer une carte "+p1.getListJoueur().get(i).getMain().getNbCarte());
 
@@ -129,6 +141,8 @@ public class Partie {
 						.println("Fin du tour \nAffichage de la carte au dessus du tas "
 								+ Partie.getInstance().getTapis()
 										.getCartesTapis().getLast().toString());
+
+				Partie.getInstance().aGagne(i);
 			}
 		}
 	}
@@ -186,36 +200,31 @@ public class Partie {
 	public boolean verifierCartePosablePositif(Carte c) {
 		if (c.getForce().ordinal() >= Partie.getInstance().getTapis()
 				.getCartesTapis().getLast().getForce().ordinal()) {
-			System.out.println("Awesome !!");
 			return true;
 		} else {
 			return false;
 		}
-
 	}
-	
+
 	public boolean verifierCartePosableNegatif(Carte c) {
-		if (c.getForce().ordinal() <= FORCE.sept.ordinal()){ //Partie.getInstance().getTapis().getCartesTapis().getLast().getForce().ordinal()) {
-			System.out.println("Vous venez de jouer une carte inférieur ou égal à 7");
+		if (c.getForce().ordinal() <= FORCE.sept.ordinal()) {
+			System.out
+					.println("Vous venez de jouer une carte inférieur ou égal à 7");
 			return true;
 		} else {
 			return false;
 		}
-
-	}
-	
-
-	public void incrementerJoueurActif() {
-
 	}
 
-	// public boolean aGagne(){
-	// if(this.getListJoueur().get(index).getMain().getCartesMain().isEmpty()){
-	// System.out.println("Le joueur "+this.getListJoueur().get(i).toString()+" a gagné !");
-	// return true;
-	// }
-	// System.exit(0);
-	// }
+	public void aGagne(int i) {
+		if (this.getListJoueur().get(i).getMain().getCartesMain().isEmpty()
+				&& this.getPioche().getCartesDeLaPioche().isEmpty()) {
+			System.out.println("Le joueur "
+					+ this.getListJoueur().get(i).toString() + " a gagné !");
+			System.exit(0);
+		}
+
+	}
 
 	public int getNbJoueur() {
 		return listJoueur.size();

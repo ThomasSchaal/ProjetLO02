@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
 
-public class Carte {
+public class Carte implements Comparable{
 
 	protected int idCarte;
 
@@ -133,5 +133,16 @@ public class Carte {
 		return "\nCarte [idCarte=" + idCarte  + ", couleurCarte="
 				+ couleurCarte + ", force=" + force + "]";
 	}
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		int valeur = -2; 
+		if(((Carte) o).getForce().ordinal() > this.getForce().ordinal()) valeur = -1;
+		if(((Carte) o).getForce().ordinal() == this.getForce().ordinal())  valeur = 0;
+		if(((Carte) o ).getForce().ordinal() < this.getForce().ordinal()) valeur =  1;
+		return valeur ;
+	}
+
 
 }

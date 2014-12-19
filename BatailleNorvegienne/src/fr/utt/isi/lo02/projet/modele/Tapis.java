@@ -36,6 +36,10 @@ public class Tapis extends ZoneDeJeu {
 		super.setJeuDeCarteMelange(cartesTapis);
 	}
 
+	/**
+	 * Donne le contenu du tas du tapis au joueur courant, garde toujours la carte supérieur du tas en référence 
+	 * @param joueurActuel
+	 */
 	public void cocogne(int joueurActuel){
 		Carte c = Partie.getInstance().getTapis().getCartesTapis().getLast();
 		Partie.getInstance().getListJoueur().get(joueurActuel).getMain().ajouterCarte(Partie.getInstance().getTapis().getCartesTapis());
