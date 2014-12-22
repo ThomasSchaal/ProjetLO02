@@ -1,13 +1,10 @@
-package fr.utt.isi.lo02.projet.controleur;
+package fr.utt.isi.lo02.projet.main;
 
 import fr.utt.isi.lo02.projet.modele.Partie;
 
-public class Test {
+public class MainMethod {
 
 	public static void main(String[] args) {
 		Partie.getInstance().jouer();
-
-		
 	}
-
 }

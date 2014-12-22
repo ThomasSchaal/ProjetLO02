@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
 
-public class Partie {
+public class Partie extends AbstractPartie {
 
 	private static Partie uniqueInstance;
 	private static ArrayList<Joueur> listJoueur;
