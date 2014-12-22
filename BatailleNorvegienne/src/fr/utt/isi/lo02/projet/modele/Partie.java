@@ -2,9 +2,8 @@ package fr.utt.isi.lo02.projet.modele;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-
 import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
+import java.util.Observable;
 
 public class Partie extends AbstractPartie {
 
@@ -47,12 +46,13 @@ public class Partie extends AbstractPartie {
 						.getMain().getCartesMain().toString());
 
 				if (Partie.getInstance().getListJoueur().get(i) instanceof JoueurVirtuel) {
-					Partie.getInstance().getListJoueur().get(i).getStrategy().choisirCarteStrategie(i);
+					Partie.getInstance().getListJoueur().get(i).getStrategy()
+							.choisirCarteStrategie(i);
 				} else {
 
 					/**
 					 * Choisit une carte // pose la carte sur le tapis
-					 * Vérification que la carte est posable 
+					 * Vérification que la carte est posable
 					 */
 					boolean jouable = true;
 					if (jouable == true) {
@@ -121,16 +121,17 @@ public class Partie extends AbstractPartie {
 				 * du coup qu'il faut en piocher plusieurs
 				 */
 				// System.out.println("Avant avoir tirer une carte "+p1.getListJoueur().get(i).getMain().getNbCarte());
-				 if(Partie.getInstance().getListJoueur().get(i).getMain().getNbCarte() <= 3){
-				// while(p1.getListJoueur().get(i).getMain().getNbCarte()==3){
-				Partie.getInstance()
-						.getListJoueur()
-						.get(i)
-						.getMain()
-						.ajouterCarteMain(
-								Partie.getInstance().getPioche()
-										.prendreCarteDuDessus());
-				 }
+				if (Partie.getInstance().getListJoueur().get(i).getMain()
+						.getNbCarte() <= 3) {
+					// while(p1.getListJoueur().get(i).getMain().getNbCarte()==3){
+					Partie.getInstance()
+							.getListJoueur()
+							.get(i)
+							.getMain()
+							.ajouterCarteMain(
+									Partie.getInstance().getPioche()
+											.prendreCarteDuDessus());
+				}
 				// }
 				// System.out.println("Après avoir tirer une carte "+p1.getListJoueur().get(i).getMain().getNbCarte());
 
