@@ -7,17 +7,18 @@ Projet de développement d'un jeu de bataille norvégienne en Java - LO02
 Priorité 1 faible - 5 forte 
 
 TODO 
-- VueCarte 2
 - VueJoueur 2 
 - VuePioche 2 
 - VueTapis 2 
+- VueJeuDeCarte 2 
 - Controler 2 
 - ajouter notifyObservers() dans Partie 4
 
 DOING 
-- Faire la fenêtre de base dans VuePartie pour pouvoir faire les autres vue 5 
+-  VueCarte 2
  
 DONE 
 - architecture MVC 
 - remplir AbstractPartie avec les méthodes de Partie 
+- Faire la fenêtre de base dans VuePartie pour pouvoir faire les autres vue 
  
