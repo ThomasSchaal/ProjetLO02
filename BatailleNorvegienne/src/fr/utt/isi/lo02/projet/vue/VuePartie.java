@@ -16,7 +16,7 @@ public class VuePartie extends JFrame implements Observer {
 
 	public VuePartie(AbstractControler controler) {
 		this.controler = controler;
-		this.setTitle("Ma première fenêtre Java");
+		this.setTitle("Jeu de bataille norvégienne");
 		this.setSize(1280, 768);
 		this.setLocationRelativeTo(null);
 
@@ -28,7 +28,8 @@ public class VuePartie extends JFrame implements Observer {
 		// Contraintes communes 
 		gbc.weightx=3;
 		gbc.weighty=2;
-		gbc.fill = GridBagConstraints.BOTH;
+		gbc.ipady = 384;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		
 		// Contraintes pour le panel Joueur NOIR
 		gbc.gridx = 0;
@@ -49,7 +50,7 @@ public class VuePartie extends JFrame implements Observer {
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth=2;
-		pan.add(new VueCarte(), gbc);
+		pan.add(new VueJeuDeCarte(), gbc);
 		
 		// Contraintes pour le panel Narrateur ORANGE 
 		gbc.gridx = 2;
