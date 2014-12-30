@@ -14,6 +14,10 @@ public class VuePartie extends JFrame implements Observer {
 
 	private AbstractControler controler;
 
+	/**
+	 * Vue qui représente la partie en entier, elle contient les autres vues et intéragie avec le controller 
+	 * @param controler
+	 */
 	public VuePartie(AbstractControler controler) {
 		this.controler = controler;
 		this.setTitle("Jeu de bataille norvégienne");

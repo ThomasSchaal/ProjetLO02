@@ -1,14 +1,14 @@
 package fr.utt.isi.lo02.projet.main;
 
-import javax.swing.JFrame;
-
 import fr.utt.isi.lo02.projet.controleur.AbstractControler;
 import fr.utt.isi.lo02.projet.controleur.PartieControler;
-import fr.utt.isi.lo02.projet.modele.Partie;
 import fr.utt.isi.lo02.projet.vue.VuePartie;
 
 public class MainMethod {
-
+	/**
+	 * Méthode main pour l'ensemble de l'application 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		//Partie.getInstance().jouer();
 		
