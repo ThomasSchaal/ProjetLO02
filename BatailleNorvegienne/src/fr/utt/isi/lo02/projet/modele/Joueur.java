@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import fr.utt.isi.lo02.projet.controleur.PartieControler;
+
 public abstract class Joueur {
 	protected int idJoueur;
 	protected String nomJoueur;
@@ -19,22 +21,30 @@ public abstract class Joueur {
 		this.carteVisible = cv;	
 	}
 
+//	/**
+//	 * Demande un nombre de joueur 
+//	 * @return nbJoueur
+//	 */
+//	public static int choisirNbJoueur() {
+//		Scanner sc = new Scanner(System.in);
+//		System.out.println("Veuillez choisir un nombre de joueurs entre 1 et 10 :");
+//		int nbJoueur = sc.nextInt();
+//		System.out.println("Vous avez saisi : " + nbJoueur);
+//		if (nbJoueur > 10 || nbJoueur == 0) {
+//			System.out.println("Entre 1 et 10, c'est pas compliqué non ? ");
+//			return choisirNbJoueur();
+//		}
+//		return nbJoueur;
+//	}
+
 	/**
-	 * Demande un nombre de joueur 
+	 * Demande un nombre de joueur GRAPHIQUE 
 	 * @return nbJoueur
 	 */
-	public static int choisirNbJoueur() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Veuillez choisir un nombre de joueurs entre 1 et 10 :");
-		int nbJoueur = sc.nextInt();
-		System.out.println("Vous avez saisi : " + nbJoueur);
-		if (nbJoueur > 10 || nbJoueur == 0) {
-			System.out.println("Entre 1 et 10, c'est pas compliqué non ? ");
-			return choisirNbJoueur();
-		}
-		return nbJoueur;
+	public static int choisirNbJoueur(){
+		return 2; 
 	}
-
+	
 	/**
 	 * Créer un tableau de Joueur en fonction du nombre de joueur
 	 * @return un tableau de joueur

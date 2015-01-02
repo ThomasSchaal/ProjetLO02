@@ -2,13 +2,17 @@ package fr.utt.isi.lo02.projet.modele;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Observer;
+
 import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
+
 import java.util.Observable;
 
-public class Partie extends AbstractPartie {
+public class Partie extends Observable {
 
 	private static Partie uniqueInstance;
 	private static ArrayList<Joueur> listJoueur;
+	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
 	private Tapis tapis;
 	private Pioche pioche;
 	private int nbTour;
@@ -261,6 +265,23 @@ public class Partie extends AbstractPartie {
 
 	public void setPioche(Pioche pioche) {
 		this.pioche = pioche;
+	}
+
+	// Implémentation du pattern observer
+	public void addObserver(Observer obs) {
+		this.listObserver.add(obs);
+	}
+
+	public void notifyObserver(String str) {
+		if (str.matches("^0[0-9]+"))
+			str = str.substring(1, str.length());
+
+		for (Observer obs : listObserver)
+			obs.update(null, str);
+	}
+
+	public void removeObserver() {
+		listObserver = new ArrayList<Observer>();
 	}
 
 }

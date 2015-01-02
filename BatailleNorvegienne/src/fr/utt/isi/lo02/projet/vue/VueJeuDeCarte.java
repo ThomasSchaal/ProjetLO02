@@ -2,22 +2,28 @@ package fr.utt.isi.lo02.projet.vue;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import fr.utt.isi.lo02.projet.controleur.PartieControler;
 import fr.utt.isi.lo02.projet.modele.Carte;
 import fr.utt.isi.lo02.projet.modele.Carte.COULEUR;
 import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
 
-public class VueJeuDeCarte extends JPanel {
+public class VueJeuDeCarte extends JPanel implements Observer{
+	
+	private PartieControler controler;
 	/**
 	 * Cette vue contient la main du joueur physique 
 	 * Chaque cartes est modélisée par un bouton, le joueur clique sur le bouton de la carte qu'il a choisit 
 	 */
-	public VueJeuDeCarte() {
+	public VueJeuDeCarte(PartieControler controler) {
+		this.controler = controler;
 		this.setBackground(Color.CYAN);
 		// Créer un bouton pour chaque carte avec la force de la carte et son id
 		// for (int i = 0 ; i <= Partie.getInstance().getNbJoueur() ; i++){
@@ -27,10 +33,10 @@ public class VueJeuDeCarte extends JPanel {
 		// this.add(c1);
 		// }
 
-		Dimension dimCarte = new Dimension(250 ,340); 
+		Dimension dimCarte = new Dimension(250 ,320); 
 		JPanel panelBoutons = new JPanel();
 		
-		ImageIcon img1 = new ImageIcon("C:/Users/THOMAS/Documents/GitHub/ProjetLO02/BatailleNorvegienne/src/Cartes/T1.png");//createImageIcon("C:/Users/THOMAS/Documents/GitHub/ProjetLO02/BatailleNorvegienne/src/Cartes/T1.png", "As de trèfle");
+		ImageIcon img1 = new ImageIcon("C:/Users/THOMAS/Documents/GitHub/ProjetLO02/BatailleNorvegienne/src/Cartes/T1.png");
 		JButton b1 = new JButton(img1);
 		b1.setPreferredSize(dimCarte);
 		panelBoutons.add(b1);
@@ -46,7 +52,7 @@ public class VueJeuDeCarte extends JPanel {
 		
 		// JScrollPane permet d'avoir un curseur de navigation pour les boutons
 		JScrollPane scrollPane = new JScrollPane(panelBoutons);
-		scrollPane.setPreferredSize(new Dimension(700,370));
+		scrollPane.setPreferredSize(new Dimension(700,350));
 		this.add(scrollPane);
 	}
 	
@@ -57,5 +63,12 @@ public class VueJeuDeCarte extends JPanel {
 		 * 
 		 */
 	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	
 }

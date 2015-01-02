@@ -6,19 +6,19 @@ import java.util.Observer;
 
 import javax.swing.*;
 
-import fr.utt.isi.lo02.projet.controleur.AbstractControler;
+import fr.utt.isi.lo02.projet.controleur.PartieControler;
 
 public class VuePartie extends JFrame implements Observer {
 
 	private static final long serialVersionUID = 8412438911738266478L;
 
-	private AbstractControler controler;
+	private PartieControler controler;
 
 	/**
 	 * Vue qui représente la partie en entier, elle contient les autres vues et intéragie avec le controller 
 	 * @param controler
 	 */
-	public VuePartie(AbstractControler controler) {
+	public VuePartie(PartieControler controler) {
 		this.controler = controler;
 		this.setTitle("Jeu de bataille norvégienne");
 		this.setSize(1280, 768);
@@ -38,28 +38,28 @@ public class VuePartie extends JFrame implements Observer {
 		// Contraintes pour le panel Joueur NOIR
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		pan.add(new VueJoueur(), gbc);
+		pan.add(new VueJoueur(controler), gbc);
 		
 		// Contraintes pour le panel Tapis VERT 
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		pan.add(new VueTapis(), gbc);
+		pan.add(new VueTapis(controler), gbc);
 		
 		// Contraintes pour le panel Pioche GRIS
 		gbc.gridx = 2;
 		gbc.gridy = 0;
-		pan.add(new VuePioche(), gbc);
+		pan.add(new VuePioche(controler), gbc);
 		
 		// Contraintes pour le panel Carte BLEU 
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth=2;
-		pan.add(new VueJeuDeCarte(), gbc);
+		pan.add(new VueJeuDeCarte(controler), gbc);
 		
 		// Contraintes pour le panel Narrateur ORANGE 
 		gbc.gridx = 2;
 		gbc.gridy = 1;
-		pan.add(new VueNarrateur(), gbc);
+		pan.add(new VueNarrateur(controler), gbc);
 		
 		this.setContentPane(pan);
 		
@@ -73,7 +73,7 @@ public class VuePartie extends JFrame implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }
