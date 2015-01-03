@@ -14,24 +14,27 @@ import fr.utt.isi.lo02.projet.vue.VueTapis;
 
 public class PartieControler implements ActionListener{
 
-	private Partie partie; 
-	private VuePartie vuePartie; 
-	private VueJeuDeCarte vueJdc; 
-	private VueJoueur vueJoueur; 
-	private VueNarrateur vueNar; 
-	private VuePioche vuePioche; 
-	private VueTapis vueTapis; 
+	private Partie partie = Partie.getInstance(); 
+	private VueJeuDeCarte vueJdc = new VueJeuDeCarte(this); 
+	private VueJoueur vueJoueur = new VueJoueur(this); 
+	private VueNarrateur vueNar = new VueNarrateur(this); 
+	private VuePioche vuePioche = new VuePioche(this); 
+	private VueTapis vueTapis = new VueTapis(this); 
 	
-	public PartieControler(Partie partie) {
-		this.partie=partie; 
-		// TODO Auto-generated constructor stub
+//	public PartieControler() {
+//		this.partie=Partie.getInstance(); 
+//		// TODO Auto-generated constructor stub
+//	}
+	public void lancerPartie(){
+		this.getPartie().jouer();
 	}
-	
 	/**
 	 * Controler de la partie 
+	 * Marche pas 
+	 * TODO envoyer l'info au model 
 	 */
-	public void demanderNbJoueur(){
-		
+	public int demanderNbJoueur(){
+		return vueNar.vueGetNbJoueur();
 	}
 
 	public Partie getPartie(){
@@ -42,8 +45,16 @@ public class PartieControler implements ActionListener{
 	 * Controler du tapis 
 	 * @return la dernière carte du tapis 
 	 */
-	public int controlerGetCarteTapis(){
-		return partie.getTapis().getCartesTapis().getFirst().getForce().ordinal();
+	public Carte controlerGetCarteTapis(){
+		return this.partie.getTapis().getCartesTapis().getFirst();
+	}
+	
+	public boolean controlerTapisVide(){
+		if(this.partie.getTapis().getNbCarte()==0){
+			return true;
+		}
+		else 
+			return false; 
 	}
 	
 	/**
@@ -51,11 +62,11 @@ public class PartieControler implements ActionListener{
 	 * @return le nombre de joueur 
 	 */
 	public int controlerGetNbJoueur(){
-		return partie.getNbJoueur();
+		return this.partie.getNbJoueur();
 	}
 	
 	public int controlerGetNbCarteJoueur(int position){
-		return partie.getListJoueur().get(position).getMain().getNbCarte();
+		return this.partie.getListJoueur().get(position).getMain().getNbCarte();
 	}
 	
 	/** 
@@ -63,22 +74,29 @@ public class PartieControler implements ActionListener{
 	 * @return vrai si la pioche est vide 
 	 */
 	public boolean controlerPiocheVide(){
-		if(partie.getPioche().getNbCartePioche()==0){
+		if(this.partie.getPioche().getNbCartePioche()==0){
 			return true;
 		}
 		else 
 			return false; 
 	}
+	
+	/**
+	 * Controler pour le jeudecarte
+	 * 
+	 */
+	public Carte controlerGetCarteMainJoueurPrincipal(int i ){
+		return this.partie.getListJoueur().get(0).getMain().getCartesMain().get(i); 
+	}
+	
+	public int controlerGetNbCarteMainJoueurPrincipal(){
+		return this.partie.getListJoueur().get(0).getMain().getNbCarte();
+	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		// vueGetNbJoueur(); 
 		
-		String s = e.getActionCommand();
-
-		if (s.startsWith("OK")) {
-			System.out.println(vueNar.vueGetNbJoueur()); 
-		}
 	}
 }

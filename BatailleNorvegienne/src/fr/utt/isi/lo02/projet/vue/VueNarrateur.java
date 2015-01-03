@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.sound.midi.ControllerEventListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,7 +20,9 @@ import fr.utt.isi.lo02.projet.controleur.PartieControler;
 public class VueNarrateur extends JPanel implements Observer{
 	
 	private PartieControler controler;
-	private int nbJoueur = 0 ; 
+	private JButton bOk; 
+	private JLabel lblText;
+	private JTextField text; 
 	
 	/**
 	 * Vue qui représente les différents affichage texte du jeu, comme "Vous avez gagné" ou "Piochez svp"
@@ -32,38 +35,61 @@ public class VueNarrateur extends JPanel implements Observer{
 		
 		JPanel panelNarrateur = new JPanel(); 
 		panelNarrateur.setPreferredSize(new Dimension(300, 340));
-		JLabel lblText = new JLabel();
-		lblText.setText("Vous avez gagné !");
+		lblText = new JLabel();
+		lblText.setText("Entrez un nombre de joueur entre 2 et 10 !");
 		panelNarrateur.add(lblText);
 		JScrollPane scrollPane = new JScrollPane(panelNarrateur);
-		
 		JPanel panelJoueur = new JPanel();
-		JTextField text = new JTextField();
+		text = new JTextField();
 		text.setPreferredSize(new Dimension(200,30));
-		JButton bOk = new JButton("OK");
+		bOk = new JButton("OK");
 		bOk.setPreferredSize(new Dimension(55,30));
-		bOk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				nbJoueur = Integer.parseInt(text.getText());
-			}
-		});
+		// bOk.addActionListener(controler);
 		panelJoueur.add(text);
 		panelJoueur.add(bOk);
 		
-		
-		
 		this.add(scrollPane, BorderLayout.CENTER);
 		this.add(panelJoueur, BorderLayout.SOUTH);
+		
+		/**
+		 * D'abord mettre tout dans la vue avant de faire le actionlistener
+		 */
+		bOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				String s = e.getActionCommand();
+				if (s.equals("OK")) { 
+						setLblTextNbJoueur();
+				}
+			}	
+		});
+
+		
 	}
 	
 	public int vueGetNbJoueur(){
-		return nbJoueur;
+		return Integer.parseInt(text.getText().trim());
+	}
+	
+	public void setLblTextNbJoueur(){
+		this.lblText.setText("Vous avez demandé "+this.vueGetNbJoueur()+" joueurs");
+	} 
+	
+//	public Long vueGetNbJoueur(){
+//		return Long.parseLong(text.getText().trim());
+//	}
+	
+	public JButton getBOk(){
+		return this.bOk;
+	}
+	
+	public JLabel getLblText(){
+		return this.lblText;
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		
+		arg = Integer.parseInt(text.getText().trim());
 	}
 
 }

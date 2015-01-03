@@ -15,23 +15,21 @@ public class MainMethod {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Partie partie = Partie.getInstance();
-		PartieControler controler = new PartieControler(partie);
+		//Partie partie = Partie.getInstance();
+		PartieControler controler = new PartieControler();
 		
 		VuePartie vuePartie = new VuePartie(controler);
-		partie.addObserver(vuePartie);
+		Partie.getInstance().addObserver(vuePartie);
 		VueTapis vueTapis = new VueTapis(controler);
-		partie.addObserver(vueTapis);
+		Partie.getInstance().addObserver(vueTapis);
 		VueJeuDeCarte vueJdc = new VueJeuDeCarte(controler);
-		partie.addObserver(vueJdc);
+		Partie.getInstance().addObserver(vueJdc);
 		VueJoueur vueJoueur = new VueJoueur(controler);
-		partie.addObserver(vueJoueur);
+		Partie.getInstance().addObserver(vueJoueur);
 		VueNarrateur vueNar = new VueNarrateur(controler);
-		partie.addObserver(vueNar);
+		Partie.getInstance().addObserver(vueNar);
 		VuePioche vuePioche = new VuePioche(controler);
-		partie.addObserver(vuePioche);
-		
-		
+		Partie.getInstance().addObserver(vuePioche);
 		
 	}
 }

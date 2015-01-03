@@ -27,12 +27,49 @@ public class Partie extends Observable {
 
 	public static synchronized Partie getInstance() {
 		if (uniqueInstance == null) {
-			uniqueInstance = new Partie(Joueur.listJoueur());
+			uniqueInstance = new Partie(listJoueur());
 		}
 
 		return uniqueInstance;
 	}
 
+	/**
+	 * Demande un nombre de joueur GRAPHIQUE 
+	 * @return nbJoueur
+	 */
+	public static int choisirNbJoueur(){
+		return 2; 
+	}
+	
+	/**
+	 * Créer un tableau de Joueur en fonction du nombre de joueur
+	 * @return un tableau de joueur
+	 */
+	public static ArrayList<Joueur> listJoueur() {
+		int nbJoueur = choisirNbJoueur();
+		ArrayList<Joueur> tabJoueur = new ArrayList<>();
+		JeuDeCarte jdcMain = new JeuDeCarte(null); 
+		JeuDeCarte jdcCC = new JeuDeCarte(null); 
+		JeuDeCarte jdcCV = new JeuDeCarte(null); 
+		Main m =new Main(0, jdcMain);
+		CarteCachee cc = new CarteCachee(0, jdcCC);
+		CarteVisible cv = new CarteVisible(0, jdcCV);
+		Joueur j = new JoueurReel(0, m, cc, cv);
+		tabJoueur.add(j);
+		for (int i = 1; i < nbJoueur; i++) {
+			JeuDeCarte jdcMain1 = new JeuDeCarte(null); 
+			JeuDeCarte jdcCC1 = new JeuDeCarte(null); 
+			JeuDeCarte jdcCV1 = new JeuDeCarte(null); 
+			Main m1 =new Main(0, jdcMain1);
+			CarteCachee cc1 = new CarteCachee(0, jdcCC1);
+			CarteVisible cv1 = new CarteVisible(0, jdcCV1); 
+			JoueurVirtuel v = new JoueurVirtuel(0, m1, cc1, cv1);
+			tabJoueur.add(v);
+		}
+		return tabJoueur;
+	}
+	
+	
 	public void jouer() {
 		/**
 		 * Distribue les cartes en début de partie

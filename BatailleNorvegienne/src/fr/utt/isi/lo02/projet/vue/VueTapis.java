@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -15,6 +16,7 @@ import fr.utt.isi.lo02.projet.controleur.PartieControler;
 public class VueTapis extends JPanel implements Observer{
 
 	private PartieControler controler;
+	
 	/**
 	 * Cette vue représente la dernière carte qui a été posée sur le tapis 
 	 */
@@ -23,11 +25,16 @@ public class VueTapis extends JPanel implements Observer{
 		this.setBackground(Color.GREEN);
 		
 		this.setLayout(new BorderLayout());
-		
 		JLabel lblCarte = new JLabel();
 		// d'abord lancer une partie 
 	//	lblCarte.setText("Carte tapis :" + controler.controlerGetCarteTapis());
 
+		if(controler.controlerTapisVide() == true){
+			lblCarte.setText("Le tapis est vide ");
+		}else {
+			lblCarte.setText(controler.controlerGetCarteTapis().getForce()+" de "+controler.controlerGetCarteTapis().getCouleurCarte());
+		}
+		
 //		lblCarte.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
 //		lblCarte.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.BLACK));
 //		lblCarte.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
