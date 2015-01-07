@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observer;
 
+import fr.utt.isi.lo02.projet.controleur.PartieControler;
 import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
 
 import java.util.Observable;
@@ -11,42 +12,60 @@ import java.util.Observable;
 public class Partie extends Observable {
 
 	private static Partie uniqueInstance;
-	private static ArrayList<Joueur> listJoueur;
+	private ArrayList<Joueur> listJoueur;
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
 	private Tapis tapis;
 	private Pioche pioche;
 	private int nbTour;
+	private int nbJoueur =Joueur.choisirNbJoueur(); 
+	private static PartieControler controler;
 
-	private Partie(ArrayList<Joueur> listJoueur) {
-		this.listJoueur = listJoueur;
+	private Partie() {
+		this.listJoueur = listJoueur();
 		JeuDeCarte jdcTapis = new JeuDeCarte(null);
 		JeuDeCarte jdcPioche = new JeuDeCarte(null);
 		this.tapis = new Tapis(0, jdcTapis);
 		this.pioche = new Pioche(0, jdcPioche);
 	}
 
-	public static synchronized Partie getInstance() {
-		if (uniqueInstance == null) {
-			uniqueInstance = new Partie(listJoueur());
-		}
-
-		return uniqueInstance;
+	/**
+	 * Holder de Partie 
+	 * permet d'avoir un singleton qui s'instancie que lorsqu'il est appelé 
+	 * @author THOMAS
+	 *
+	 */
+	private static class PartieHolder{
+		
+			private final static Partie instance = new Partie();
+		
 	}
+	
+	public static Partie getInstance(){
+		return PartieHolder.instance;
+	}
+	
+//	public static synchronized Partie getInstance() {
+//		if (uniqueInstance == null) {
+//			uniqueInstance = new Partie();
+//		}
+//
+//		return uniqueInstance;
+//	}
 
 	/**
 	 * Demande un nombre de joueur GRAPHIQUE 
 	 * @return nbJoueur
 	 */
-	public static int choisirNbJoueur(){
-		return 2; 
-	}
+//	public static int choisirNbJoueur(){
+//		return 2;//controler.demanderNbJoueur(); 
+//	}
 	
 	/**
 	 * Créer un tableau de Joueur en fonction du nombre de joueur
 	 * @return un tableau de joueur
 	 */
-	public static ArrayList<Joueur> listJoueur() {
-		int nbJoueur = choisirNbJoueur();
+	public ArrayList<Joueur> listJoueur() {
+//		int nbJoueur2 = Joueur;
 		ArrayList<Joueur> tabJoueur = new ArrayList<>();
 		JeuDeCarte jdcMain = new JeuDeCarte(null); 
 		JeuDeCarte jdcCC = new JeuDeCarte(null); 
@@ -56,7 +75,7 @@ public class Partie extends Observable {
 		CarteVisible cv = new CarteVisible(0, jdcCV);
 		Joueur j = new JoueurReel(0, m, cc, cv);
 		tabJoueur.add(j);
-		for (int i = 1; i < nbJoueur; i++) {
+		for (int i = 1; i < this.nbJoueur; i++) {
 			JeuDeCarte jdcMain1 = new JeuDeCarte(null); 
 			JeuDeCarte jdcCC1 = new JeuDeCarte(null); 
 			JeuDeCarte jdcCV1 = new JeuDeCarte(null); 
@@ -71,6 +90,7 @@ public class Partie extends Observable {
 	
 	
 	public void jouer() {
+		
 		/**
 		 * Distribue les cartes en début de partie
 		 */
@@ -268,7 +288,7 @@ public class Partie extends Observable {
 
 	}
 
-	public int getNbJoueur() {
+	public int getNbListJoueur() {
 		return listJoueur.size();
 	}
 
@@ -278,14 +298,27 @@ public class Partie extends Observable {
 
 	public void setListJoueur(ArrayList<Joueur> listJoueur) {
 		this.listJoueur = listJoueur;
+		setChanged();
+		notifyObservers();
 	}
 
+	public int getNbJoueur(){
+		return nbJoueur;
+	}
+	
+	public void setNbJoueur(int i){
+		this.nbJoueur = i; 
+		setChanged();
+		notifyObservers();
+	}
 	public int getNbTour() {
 		return nbTour;
 	}
 
 	public void setNbTour(int nbTour) {
 		this.nbTour = nbTour;
+		setChanged();
+		notifyObservers();
 	}
 
 	public Tapis getTapis() {
@@ -294,6 +327,8 @@ public class Partie extends Observable {
 
 	public void setTapis(Tapis tapis) {
 		this.tapis = tapis;
+		setChanged();
+		notifyObservers();
 	}
 
 	public Pioche getPioche() {
@@ -302,6 +337,8 @@ public class Partie extends Observable {
 
 	public void setPioche(Pioche pioche) {
 		this.pioche = pioche;
+		setChanged();
+		notifyObservers();
 	}
 
 	// Implémentation du pattern observer
@@ -320,5 +357,6 @@ public class Partie extends Observable {
 	public void removeObserver() {
 		listObserver = new ArrayList<Observer>();
 	}
+	
 
 }

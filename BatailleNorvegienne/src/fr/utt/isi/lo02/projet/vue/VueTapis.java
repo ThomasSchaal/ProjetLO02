@@ -16,24 +16,23 @@ import fr.utt.isi.lo02.projet.controleur.PartieControler;
 public class VueTapis extends JPanel implements Observer{
 
 	private PartieControler controler;
+	private JLabel lblCarte ; 
 	
 	/**
 	 * Cette vue représente la dernière carte qui a été posée sur le tapis 
 	 */
 	public VueTapis(PartieControler controler){
 		this.controler = controler;
-		this.setBackground(Color.GREEN);
+		this.setBackground(Color.LIGHT_GRAY);
 		
 		this.setLayout(new BorderLayout());
-		JLabel lblCarte = new JLabel();
-		// d'abord lancer une partie 
-	//	lblCarte.setText("Carte tapis :" + controler.controlerGetCarteTapis());
+		lblCarte = new JLabel();
 
-		if(controler.controlerTapisVide() == true){
-			lblCarte.setText("Le tapis est vide ");
-		}else {
-			lblCarte.setText(controler.controlerGetCarteTapis().getForce()+" de "+controler.controlerGetCarteTapis().getCouleurCarte());
-		}
+//		if(controler.controlerTapisVide() == true){
+//			lblCarte.setText("Le tapis est vide ");
+//		}else {
+//			lblCarte.setText(controler.controlerGetCarteTapis().getForce()+" de "+controler.controlerGetCarteTapis().getCouleurCarte());
+//		}
 		
 //		lblCarte.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
 //		lblCarte.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.BLACK));
@@ -46,7 +45,11 @@ public class VueTapis extends JPanel implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		
+		if(this.controler.controlerTapisVide() == true){
+			lblCarte.setText("Le tapis est vide ");
+		}else {
+			lblCarte.setText(controler.controlerGetCarteTapis().getForce()+" de "+this.controler.controlerGetCarteTapis().getCouleurCarte());
+		}
 	}
 	
 }

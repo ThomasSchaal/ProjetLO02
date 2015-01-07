@@ -29,7 +29,7 @@ public class VueNarrateur extends JPanel implements Observer{
 	 */
 	public VueNarrateur(PartieControler controler){
 		this.controler = controler;
-		this.setBackground(Color.ORANGE);
+		this.setBackground(Color.LIGHT_GRAY);
 		
 		this.setLayout(new BorderLayout());
 		
@@ -44,7 +44,6 @@ public class VueNarrateur extends JPanel implements Observer{
 		text.setPreferredSize(new Dimension(200,30));
 		bOk = new JButton("OK");
 		bOk.setPreferredSize(new Dimension(55,30));
-		// bOk.addActionListener(controler);
 		panelJoueur.add(text);
 		panelJoueur.add(bOk);
 		
@@ -67,16 +66,13 @@ public class VueNarrateur extends JPanel implements Observer{
 	}
 	
 	public int vueGetNbJoueur(){
-		return Integer.parseInt(text.getText().trim());
+		return 2;//Integer.parseInt(text.getText().trim());
 	}
 	
 	public void setLblTextNbJoueur(){
 		this.lblText.setText("Vous avez demandé "+this.vueGetNbJoueur()+" joueurs");
 	} 
 	
-//	public Long vueGetNbJoueur(){
-//		return Long.parseLong(text.getText().trim());
-//	}
 	
 	public JButton getBOk(){
 		return this.bOk;
@@ -90,6 +86,7 @@ public class VueNarrateur extends JPanel implements Observer{
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		arg = Integer.parseInt(text.getText().trim());
+		this.lblText.setText("Vous avez demandé "+this.vueGetNbJoueur()+" joueurs");
 	}
 
 }

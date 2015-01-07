@@ -20,7 +20,7 @@ public class VueJoueur extends JPanel implements Observer {
 	 */
 	public VueJoueur(PartieControler controler){
 		this.controler = controler;
-		this.setBackground(Color.BLACK);
+		this.setBackground(Color.LIGHT_GRAY);
 		
 		Dimension dimLabel = new Dimension(150, 20);
 		JPanel panelJoueur = new JPanel();
@@ -28,12 +28,12 @@ public class VueJoueur extends JPanel implements Observer {
 		panelJoueur.setLayout(new GridLayout(0,1));
 		
 		
-		for(int i = 0 ; i < controler.controlerGetNbJoueur() ; i ++ ){
-			JLabel lbl = new JLabel(); 
-			lbl.setPreferredSize(dimLabel);
-			lbl.setText("Joueur "+i+ " : "+ controler.controlerGetNbCarteJoueur(i));
-			panelJoueur.add(lbl);
-		}
+//		for(int i = 0 ; i < this.controler.controlerGetNbJoueur() ; i ++ ){
+//			JLabel lbl = new JLabel(); 
+//			lbl.setPreferredSize(dimLabel);
+//			lbl.setText("Joueur "+i+ " : "+ this.controler.controlerGetNbCarteJoueur(i));
+//			panelJoueur.add(lbl);
+//		}
 		
 //			JLabel lblJ1 = new JLabel();
 //			lblJ1.setPreferredSize(dimLabel);

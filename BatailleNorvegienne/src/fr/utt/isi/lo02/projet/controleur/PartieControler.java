@@ -21,13 +21,17 @@ public class PartieControler implements ActionListener{
 	private VuePioche vuePioche = new VuePioche(this); 
 	private VueTapis vueTapis = new VueTapis(this); 
 	
-//	public PartieControler() {
-//		this.partie=Partie.getInstance(); 
-//		// TODO Auto-generated constructor stub
+//	public PartieControler(Partie partie) {
+//		this.partie=partie ; //Partie.getInstance(); 	
 //	}
+	
 	public void lancerPartie(){
+	
+	//	choisirNbJoueur(demanderNbJoueur());
+	//	partie = Partie.getInstance();
 		this.getPartie().jouer();
 	}
+	
 	/**
 	 * Controler de la partie 
 	 * Marche pas 
@@ -39,6 +43,11 @@ public class PartieControler implements ActionListener{
 
 	public Partie getPartie(){
 		return this.partie ; 
+	}
+	
+	public void choisirNbJoueur(int nbJoueur){
+		System.out.println(this.partie.getNbJoueur());
+		this.partie.setNbJoueur(nbJoueur);
 	}
 	
 	/** 

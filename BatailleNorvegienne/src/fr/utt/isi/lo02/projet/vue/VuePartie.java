@@ -13,6 +13,11 @@ public class VuePartie extends JFrame implements Observer {
 	private static final long serialVersionUID = 8412438911738266478L;
 
 	private PartieControler controler;
+	private VueJeuDeCarte vueJdc = new VueJeuDeCarte(this.controler);
+	private VueJoueur vueJoueur = new VueJoueur(this.controler);
+	private VuePioche vuePioche = new VuePioche(this.controler);
+	private VueTapis vueTapis = new VueTapis(this.controler);
+	private VueNarrateur vueNar  = new VueNarrateur(this.controler);
 
 	/**
 	 * Vue qui représente la partie en entier, elle contient les autres vues et intéragie avec le controller 
@@ -20,6 +25,11 @@ public class VuePartie extends JFrame implements Observer {
 	 */
 	public VuePartie(PartieControler controler) {
 		this.controler = controler;
+		vueJdc = new VueJeuDeCarte(this.controler);
+		vueJoueur = new VueJoueur(controler);
+		vuePioche = new VuePioche(controler);
+		vueTapis = new VueTapis(controler);
+		vueNar  = new VueNarrateur(controler);
 		this.setTitle("Jeu de bataille norvégienne");
 		this.setSize(1280, 768);
 		this.setLocationRelativeTo(null);
@@ -38,28 +48,28 @@ public class VuePartie extends JFrame implements Observer {
 		// Contraintes pour le panel Joueur NOIR
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		pan.add(new VueJoueur(controler), gbc);
+		pan.add(vueJoueur, gbc);
 		
 		// Contraintes pour le panel Tapis VERT 
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		pan.add(new VueTapis(controler), gbc);
+		pan.add(vueTapis, gbc);
 		
 		// Contraintes pour le panel Pioche GRIS
 		gbc.gridx = 2;
 		gbc.gridy = 0;
-		pan.add(new VuePioche(controler), gbc);
+		pan.add(vuePioche, gbc);
 		
-		// Contraintes pour le panel Carte BLEU 
+		// Contraintes pour le panel JeuDeCarte BLEU 
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth=2;
-		pan.add(new VueJeuDeCarte(controler), gbc);
+		pan.add(vueJdc, gbc);
 		
 		// Contraintes pour le panel Narrateur ORANGE 
 		gbc.gridx = 2;
 		gbc.gridy = 1;
-		pan.add(new VueNarrateur(controler), gbc);
+		pan.add(vueNar, gbc);
 		
 		this.setContentPane(pan);
 		
@@ -74,6 +84,54 @@ public class VuePartie extends JFrame implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public PartieControler getControler() {
+		return controler;
+	}
+
+	public void setControler(PartieControler controler) {
+		this.controler = controler;
+	}
+
+	public VueJeuDeCarte getVueJdc() {
+		return vueJdc;
+	}
+
+	public void setVueJdc(VueJeuDeCarte vueJdc) {
+		this.vueJdc = vueJdc;
+	}
+
+	public VueJoueur getVueJoueur() {
+		return vueJoueur;
+	}
+
+	public void setVueJoueur(VueJoueur vueJoueur) {
+		this.vueJoueur = vueJoueur;
+	}
+
+	public VuePioche getVuePioche() {
+		return vuePioche;
+	}
+
+	public void setVuePioche(VuePioche vuePioche) {
+		this.vuePioche = vuePioche;
+	}
+
+	public VueTapis getVueTapis() {
+		return vueTapis;
+	}
+
+	public void setVueTapis(VueTapis vueTapis) {
+		this.vueTapis = vueTapis;
+	}
+
+	public VueNarrateur getVueNar() {
+		return vueNar;
+	}
+
+	public void setVueNar(VueNarrateur vueNar) {
+		this.vueNar = vueNar;
 	}
 
 }

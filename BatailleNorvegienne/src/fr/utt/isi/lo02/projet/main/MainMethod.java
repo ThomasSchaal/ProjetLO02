@@ -11,25 +11,27 @@ import fr.utt.isi.lo02.projet.vue.VueTapis;
 
 public class MainMethod {
 	/**
-	 * Méthode main pour l'ensemble de l'application 
+	 * Méthode main pour l'ensemble de l'application
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//Partie partie = Partie.getInstance();
-		PartieControler controler = new PartieControler();
-		
-		VuePartie vuePartie = new VuePartie(controler);
+		Partie partie = Partie.getInstance();
+		PartieControler controller = new PartieControler();
+
+		VuePartie vuePartie = new VuePartie(controller);
 		Partie.getInstance().addObserver(vuePartie);
-		VueTapis vueTapis = new VueTapis(controler);
-		Partie.getInstance().addObserver(vueTapis);
-		VueJeuDeCarte vueJdc = new VueJeuDeCarte(controler);
-		Partie.getInstance().addObserver(vueJdc);
-		VueJoueur vueJoueur = new VueJoueur(controler);
-		Partie.getInstance().addObserver(vueJoueur);
-		VueNarrateur vueNar = new VueNarrateur(controler);
-		Partie.getInstance().addObserver(vueNar);
-		VuePioche vuePioche = new VuePioche(controler);
-		Partie.getInstance().addObserver(vuePioche);
-		
+
+		Partie.getInstance().addObserver(vuePartie.getVueJdc());
+
+		Partie.getInstance().addObserver(vuePartie.getVueJoueur());
+
+		Partie.getInstance().addObserver(vuePartie.getVueNar());
+
+		Partie.getInstance().addObserver(vuePartie.getVuePioche());
+
+		Partie.getInstance().addObserver(vuePartie.getVueTapis());
+
+		controller.lancerPartie();
 	}
 }
