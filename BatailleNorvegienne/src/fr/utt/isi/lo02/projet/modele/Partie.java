@@ -8,7 +8,12 @@ import fr.utt.isi.lo02.projet.controleur.PartieControler;
 import fr.utt.isi.lo02.projet.modele.Carte.FORCE;
 
 import java.util.Observable;
-
+/**
+ * Classe principale de l'application 
+ * Singleton Holder 
+ * @author THOMAS
+ *
+ */
 public class Partie extends Observable {
 
 	private static Partie uniqueInstance;
@@ -35,37 +40,22 @@ public class Partie extends Observable {
 	 *
 	 */
 	private static class PartieHolder{
-		
 			private final static Partie instance = new Partie();
-		
 	}
 	
+	/**
+	 * Permet de créer une partie 
+	 * @return une partie 
+	 */
 	public static Partie getInstance(){
 		return PartieHolder.instance;
 	}
-	
-//	public static synchronized Partie getInstance() {
-//		if (uniqueInstance == null) {
-//			uniqueInstance = new Partie();
-//		}
-//
-//		return uniqueInstance;
-//	}
-
-	/**
-	 * Demande un nombre de joueur GRAPHIQUE 
-	 * @return nbJoueur
-	 */
-//	public static int choisirNbJoueur(){
-//		return 2;//controler.demanderNbJoueur(); 
-//	}
 	
 	/**
 	 * Créer un tableau de Joueur en fonction du nombre de joueur
 	 * @return un tableau de joueur
 	 */
 	public ArrayList<Joueur> listJoueur() {
-//		int nbJoueur2 = Joueur;
 		ArrayList<Joueur> tabJoueur = new ArrayList<>();
 		JeuDeCarte jdcMain = new JeuDeCarte(null); 
 		JeuDeCarte jdcCC = new JeuDeCarte(null); 
@@ -181,10 +171,8 @@ public class Partie extends Observable {
 				 * partie qui permet de remplir si on pose plusieurs cartes et
 				 * du coup qu'il faut en piocher plusieurs
 				 */
-				// System.out.println("Avant avoir tirer une carte "+p1.getListJoueur().get(i).getMain().getNbCarte());
 				if (Partie.getInstance().getListJoueur().get(i).getMain()
 						.getNbCarte() <= 3) {
-					// while(p1.getListJoueur().get(i).getMain().getNbCarte()==3){
 					Partie.getInstance()
 							.getListJoueur()
 							.get(i)
@@ -193,8 +181,6 @@ public class Partie extends Observable {
 									Partie.getInstance().getPioche()
 											.prendreCarteDuDessus());
 				}
-				// }
-				// System.out.println("Après avoir tirer une carte "+p1.getListJoueur().get(i).getMain().getNbCarte());
 
 				/**
 				 * Afficher la dernière carte du tapis (celle du dessus)
@@ -255,10 +241,18 @@ public class Partie extends Observable {
 		this.pioche.setNbCartePioche(nb);
 	}
 
+	/**
+	 * Incrémnte la partie d'un tour 
+	 */
 	public void incrementerTour() {
 		nbTour++;
 	}
 
+	/**
+	 * Vérifie si la carte que l'on veut poser est supérieur à la dernière du tapis
+	 * @param une carte 
+	 * @return true si la carte est posable
+	 */
 	public boolean verifierCartePosablePositif(Carte c) {
 		if (c.getForce().ordinal() >= Partie.getInstance().getTapis()
 				.getCartesTapis().getLast().getForce().ordinal()) {
@@ -268,6 +262,11 @@ public class Partie extends Observable {
 		}
 	}
 
+	/**
+	 * Vérifie si la carte que l'on veut poser est inférieur à la dernière du tapis
+	 * @param une carte 
+	 * @return true si la carte est posable
+	 */
 	public boolean verifierCartePosableNegatif(Carte c) {
 		if (c.getForce().ordinal() <= FORCE.sept.ordinal()) {
 			System.out
@@ -278,6 +277,10 @@ public class Partie extends Observable {
 		}
 	}
 
+	/**
+	 * Vérifie si un joueur a gagné 
+	 * @param l'index d'un joueur 
+	 */
 	public void aGagne(int i) {
 		if (this.getListJoueur().get(i).getMain().getCartesMain().isEmpty()
 				&& this.getPioche().getCartesDeLaPioche().isEmpty()) {
@@ -341,11 +344,18 @@ public class Partie extends Observable {
 		notifyObservers();
 	}
 
-	// Implémentation du pattern observer
+	/**
+	 * Implémentation du design patter Observer/Observable 
+	 * Permet d'ajouter un observer 
+	 */
 	public void addObserver(Observer obs) {
 		this.listObserver.add(obs);
 	}
 
+	/**
+	 * Notifie un changement aux observers 
+	 * @param un texte 
+	 */
 	public void notifyObserver(String str) {
 		if (str.matches("^0[0-9]+"))
 			str = str.substring(1, str.length());
@@ -354,6 +364,9 @@ public class Partie extends Observable {
 			obs.update(null, str);
 	}
 
+	/**
+	 * Permet de supprimer un observer 
+	 */
 	public void removeObserver() {
 		listObserver = new ArrayList<Observer>();
 	}

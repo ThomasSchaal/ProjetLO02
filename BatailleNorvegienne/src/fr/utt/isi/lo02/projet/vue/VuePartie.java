@@ -45,45 +45,36 @@ public class VuePartie extends JFrame implements Observer {
 		gbc.ipady = 384;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		
-		// Contraintes pour le panel Joueur NOIR
+		// Contraintes pour le panel Joueur 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		pan.add(vueJoueur, gbc);
 		
-		// Contraintes pour le panel Tapis VERT 
+		// Contraintes pour le panel Tapis  
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		pan.add(vueTapis, gbc);
 		
-		// Contraintes pour le panel Pioche GRIS
+		// Contraintes pour le panel Pioche 
 		gbc.gridx = 2;
 		gbc.gridy = 0;
 		pan.add(vuePioche, gbc);
 		
-		// Contraintes pour le panel JeuDeCarte BLEU 
+		// Contraintes pour le panel JeuDeCarte 
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth=2;
 		pan.add(vueJdc, gbc);
 		
-		// Contraintes pour le panel Narrateur ORANGE 
+		// Contraintes pour le panel Narrateur 
 		gbc.gridx = 2;
 		gbc.gridy = 1;
 		pan.add(vueNar, gbc);
 		
 		this.setContentPane(pan);
-		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// Pas de this.pack au début, compacte la page au max et du coup ne l'affiche pas en entier 
-		//this.pack();
 		this.setVisible(true);
 
-	}
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public PartieControler getControler() {
@@ -132,6 +123,12 @@ public class VuePartie extends JFrame implements Observer {
 
 	public void setVueNar(VueNarrateur vueNar) {
 		this.vueNar = vueNar;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

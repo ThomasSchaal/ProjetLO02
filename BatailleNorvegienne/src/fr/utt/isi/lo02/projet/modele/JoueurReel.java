@@ -1,5 +1,9 @@
 package fr.utt.isi.lo02.projet.modele;
-
+/**
+ * Classe qui créer un joueur réelle 
+ * @author THOMAS
+ *
+ */
 public class JoueurReel extends Joueur{
 
 	public JoueurReel(int idJoueur, Main m, CarteCachee cc, CarteVisible cv) {

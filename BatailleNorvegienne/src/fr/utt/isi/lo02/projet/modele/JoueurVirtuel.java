@@ -1,5 +1,10 @@
 package fr.utt.isi.lo02.projet.modele;
 
+/**
+ * Classe qui permet de créer un joueur virtuelle avec sa stratégie 
+ * @author THOMAS
+ *
+ */
 public class JoueurVirtuel extends Joueur {
 
 	private IStrategie strategy;
@@ -50,6 +55,9 @@ public class JoueurVirtuel extends Joueur {
 		super.setCarteVisible(carteVisible);
 	}
 
+	/**
+	 * Implémentation de la méthode abstraite de Joueur 
+	 */
 	public IStrategie getStrategy() {
 		return strategy;
 	}

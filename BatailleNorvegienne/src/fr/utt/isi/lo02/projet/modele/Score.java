@@ -1,5 +1,10 @@
 package fr.utt.isi.lo02.projet.modele;
 
+/**
+ * Classe qui gère le score après la fin d'une partie
+ * @author THOMAS
+ *
+ */
 public class Score {
 	private int nbTour; 
 	private String nomJoueur; 

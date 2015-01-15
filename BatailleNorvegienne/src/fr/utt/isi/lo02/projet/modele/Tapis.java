@@ -1,5 +1,10 @@
 package fr.utt.isi.lo02.projet.modele;
 
+/**
+ * Zone de jeu qui contient le tapis 
+ * @author THOMAS
+ *
+ */
 public class Tapis extends ZoneDeJeu {
 	 private int nbCarte; 
 	 private JeuDeCarte cartesTapis; 
@@ -7,15 +12,19 @@ public class Tapis extends ZoneDeJeu {
 	 public Tapis(int nbCarte, JeuDeCarte cartesTapis){
 		 super(nbCarte, cartesTapis);
 	 }
-
-	 public void ramasserLeTas(){
-		 
-	 }
 	 
+	 /**
+	  * Permet d'ajouter une carte au tapis 
+	  * @param une carte 
+	  */
 	 public void ajouterCarteTapis(Carte c){
 		 super.ajouterCarte(c);
 	 }
 	 
+	 /**
+	  * Permet d'ajouter une liste de carte au tapis
+	  * @param une liste de carte 
+	  */
 	 public void ajouterCarteTapis(JeuDeCarte jdc){
 		 super.ajouterCarte(jdc);
 	 }
@@ -47,6 +56,9 @@ public class Tapis extends ZoneDeJeu {
 		Partie.getInstance().getTapis().ajouterCarte(c);
 	 }
 	
+	/**.
+	 * Vide la liste de carte du tapis
+	 */
 	public void becher(){
 		Partie.getInstance().getTapis().getCartesTapis().clear();
 	}

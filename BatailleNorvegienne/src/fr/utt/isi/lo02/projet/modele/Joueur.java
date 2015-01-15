@@ -1,11 +1,12 @@
 package fr.utt.isi.lo02.projet.modele;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Scanner;
 
-import fr.utt.isi.lo02.projet.controleur.PartieControler;
-
+/**
+ * Créer un joueur avec sa main, ses cartes cachées et ses cartes visibles 
+ * @author THOMAS
+ *
+ */
 public abstract class Joueur {
 	protected int idJoueur;
 	protected String nomJoueur;
@@ -13,7 +14,6 @@ public abstract class Joueur {
 	protected CarteCachee carteCachee;
 	protected CarteVisible carteVisible;
 
-	// TODO rajouter le nom au joueur
 	public Joueur(int idJoueur, Main m, CarteCachee cc, CarteVisible cv) {
 		this.idJoueur = idJoueur;
 		this.main = m;
@@ -37,11 +37,19 @@ public abstract class Joueur {
 		return nbJoueur;
 	}
 
-	
+	/**
+	 * Methode qui permet d'échanger deux cartes entre les cartes visibles et la main d'un joueur 
+	 * @param carte1
+	 * @param carte2
+	 */
 	public void echangerLesCartes(Carte carte1, Carte carte2) {
 
 	}
 
+	/**
+	 * Permet de choisir les cartes dans les mains d'un joueur
+	 * @return
+	 */
 	public Carte choisirCarteMain(){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez choisir une des cartes de votre main (1, 2, 3, ...) :");
@@ -54,6 +62,10 @@ public abstract class Joueur {
 		return  this.getMain().getCartesMain().get(numCarte-1);
 	}
 	
+	/**
+	 * Permet de choisir un joueur 
+	 * @return
+	 */
 	public int choisirJoueur(){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez choisir un joueur cible (0, 1, 2, 3 .... ) ");
@@ -107,6 +119,10 @@ public abstract class Joueur {
 		this.carteVisible = carteVisible;
 	}
 
+	/**
+	 * Méthode abstraite qui récupère une stratégie 
+	 * @return
+	 */
 	public abstract IStrategie getStrategy();
 	
 	

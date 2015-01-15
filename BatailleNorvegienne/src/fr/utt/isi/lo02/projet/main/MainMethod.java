@@ -10,6 +10,7 @@ import fr.utt.isi.lo02.projet.vue.VuePioche;
 import fr.utt.isi.lo02.projet.vue.VueTapis;
 
 public class MainMethod {
+	
 	/**
 	 * Méthode main pour l'ensemble de l'application
 	 * 

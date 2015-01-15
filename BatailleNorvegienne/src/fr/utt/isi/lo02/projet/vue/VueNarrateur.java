@@ -65,14 +65,20 @@ public class VueNarrateur extends JPanel implements Observer{
 		
 	}
 	
+	/**
+	 * Permet de récupèré le nombre de joueur entrer par l'utilisateur
+	 * @return un nombre de joueur 
+	 */
 	public int vueGetNbJoueur(){
-		return 2;//Integer.parseInt(text.getText().trim());
+		return Integer.parseInt(text.getText().trim());
 	}
 	
+	/**
+	 * Permet d'afficher le nombre de joueur entré par un utilisateur
+	 */
 	public void setLblTextNbJoueur(){
 		this.lblText.setText("Vous avez demandé "+this.vueGetNbJoueur()+" joueurs");
 	} 
-	
 	
 	public JButton getBOk(){
 		return this.bOk;

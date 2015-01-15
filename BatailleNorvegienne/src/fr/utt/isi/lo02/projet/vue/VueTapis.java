@@ -27,17 +27,15 @@ public class VueTapis extends JPanel implements Observer{
 		
 		this.setLayout(new BorderLayout());
 		lblCarte = new JLabel();
-
-//		if(controler.controlerTapisVide() == true){
-//			lblCarte.setText("Le tapis est vide ");
-//		}else {
-//			lblCarte.setText(controler.controlerGetCarteTapis().getForce()+" de "+controler.controlerGetCarteTapis().getCouleurCarte());
-//		}
+		lblCarte.setText("Le tapis est vide ");
 		
-//		lblCarte.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
-//		lblCarte.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.BLACK));
-//		lblCarte.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-//		lblCarte.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+		if(controler.controlerTapisVide() == true){
+			lblCarte.setText("Le tapis est vide ");
+		}else {
+			lblCarte.setText(controler.controlerGetCarteTapis().getForce()+" de "+controler.controlerGetCarteTapis().getCouleurCarte());
+		}
+		
+
 		
 		lblCarte.setPreferredSize(new Dimension(100, 100));
 		this.add(lblCarte, BorderLayout.CENTER); 

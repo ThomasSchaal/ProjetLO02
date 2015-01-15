@@ -1,9 +1,17 @@
 package fr.utt.isi.lo02.projet.modele;
 
 import java.util.Iterator;
-
+/**
+ * Classe qui contient la stratégie d'un joueur virtuel 
+ * @author THOMAS
+ *
+ */
 public class EasyStrategy implements IStrategie {
 
+	/**
+	 * Méthode qui choisit la première carte posable d'un joueur virtuel 
+	 * @param l'index d'un joueur dans la liste 
+	 */
 	public void choisirCarteStrategie(int i) {
 		JeuDeCarte jdc = new JeuDeCarte(Partie.getInstance().getListJoueur()
 				.get(i).getMain().getCartesMain());
